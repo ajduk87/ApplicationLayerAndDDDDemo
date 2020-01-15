@@ -229,7 +229,6 @@
     <Compile Include="ApplicationLayer\Validation\Storage\StorageDeleteValidator.cs" />
     <Compile Include="ApplicationLayer\Validation\Storage\StorageUpdateValidator.cs" />
     <Compile Include="DomainLayer\Entities\ActionEntities\Action.cs" />
-    <Compile Include="DomainLayer\Entities\CommonEntities\Money.cs" />
     <Compile Include="DomainLayer\Entities\CustomerEntities\OrderCustomer.cs" />
     <Compile Include="DomainLayer\Entities\InvoicesEntities\Invoice.cs" />
     <Compile Include="DomainLayer\Entities\InvoicesEntities\InvoiceCommercialist.cs" />
@@ -249,6 +248,7 @@
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\Currency.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\Id.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\DateTimeValueObject.cs" />
+    <Compile Include="DomainLayer\Entities\ValueObjects\Common\Money.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\Percent.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\State.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\InvoiceItemInvoice\InvoiceId.cs" />
@@ -429,7 +429,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DomainLayer\Entities\CommonEntities\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DomainLayer\Repositories\Sql\ActionQueries.resx">
       <Generator>ResXFileCodeGenerator</Generator>

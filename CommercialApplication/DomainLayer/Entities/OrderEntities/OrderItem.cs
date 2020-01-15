@@ -1,4 +1,4 @@
-﻿using CommercialApplicationCommand.DomainLayer.Entities.CommonEntities;
+﻿using CommercialApplication.DomainLayer.Entities.ValueObjects.Common;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.InvoiceItem;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;

@@ -1,5 +1,4 @@
-﻿using CommercialApplicationCommand.DomainLayer.Entities.CommonEntities;
-using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
+﻿using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
 using System.Collections.Generic;
 using System.Data;
