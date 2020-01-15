@@ -1,4 +1,5 @@
-﻿using CommercialApplicationCommand.ApplicationLayer.Dtoes.Action;
+﻿using CommercialApplication.DomainLayer.Repositories.OrderRepositories.OrderItemRepositories;
+using CommercialApplicationCommand.ApplicationLayer.Dtoes.Action;
 using CommercialApplicationCommand.DomainLayer.Entities.ActionEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.CommonEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
@@ -15,13 +16,13 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 {
     public class OrderItemService : IOrderItemService
     {
-        private readonly IOrderItemRepository orderItemRepository;
+        private readonly IOrderItemSelectRepository orderItemRepository;
         private readonly IActionRepository actionRepository;
         private readonly IProductRepository productRepository;
 
         public OrderItemService()
         {
-            this.orderItemRepository = RepositoryFactory.CreateOrderItemRepository();
+            this.orderItemRepository = RepositoryFactory.CreateOrderItemSelectRepository();
             this.actionRepository = RepositoryFactory.CreateActionRepository();
             this.productRepository = RepositoryFactory.CreateProductRepository();
         }

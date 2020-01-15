@@ -1,4 +1,5 @@
-﻿using CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories;
+﻿using CommercialApplication.DomainLayer.Repositories.OrderRepositories.OrderItemRepositories;
+using CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.CustomerRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.InvoicesRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.OrderRepositories;
@@ -48,9 +49,9 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.Factory
             return new OrderItemOrderRepository();
         }
 
-        public static OrderItemRepository CreateOrderItemRepository()
+        public static OrderItemSelectRepository CreateOrderItemSelectRepository()
         {
-            return new OrderItemRepository();
+            return new OrderItemSelectRepository();
         }
 
         public static OrderRepository CreateOrderRepository()

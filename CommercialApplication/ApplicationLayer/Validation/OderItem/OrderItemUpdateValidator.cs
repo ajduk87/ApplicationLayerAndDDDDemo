@@ -1,4 +1,5 @@
 ﻿using CommercialApplication.ApplicationLayer.Models.Order;
+using CommercialApplication.DomainLayer.Repositories.OrderRepositories.OrderItemRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.Factory;
 using CommercialApplicationCommand.DomainLayer.Repositories.OrderRepositories;
@@ -10,14 +11,14 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.OderItem
 {
     internal class OrderItemUpdateValidator : AbstractValidator<OrderItemUpdateModel>
     {
-        private readonly IOrderItemRepository orderItemRepository;
+        private readonly IOrderItemSelectRepository orderItemRepository;
         private readonly IProductRepository productRepository;
         private readonly IActionRepository actionRepository;
         private readonly IDatabaseConnectionFactory databaseConnectionFactory;
 
         public OrderItemUpdateValidator(IDatabaseConnectionFactory databaseConnectionFactory)
         {
-            this.orderItemRepository = RepositoryFactory.CreateOrderItemRepository();
+            this.orderItemRepository = RepositoryFactory.CreateOrderItemSelectRepository();
             this.productRepository = RepositoryFactory.CreateProductRepository();
             this.actionRepository = RepositoryFactory.CreateActionRepository();
             this.databaseConnectionFactory = databaseConnectionFactory;

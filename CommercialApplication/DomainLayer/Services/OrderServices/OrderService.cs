@@ -12,7 +12,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository orderRepository;
-        private readonly IOrderItemRepository orderItemRepository;
+        //private readonly IOrderItemRepository orderItemRepository;
         private readonly IOrderItemOrderRepository orderItemOrderRepository;
 
         private readonly IOrderCustomerService orderCustomerService;
@@ -22,7 +22,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
         public OrderService()
         {
             this.orderRepository = RepositoryFactory.CreateOrderRepository();
-            this.orderItemRepository = RepositoryFactory.CreateOrderItemRepository();
+            //this.orderItemRepository = RepositoryFactory.CreateOrderItemRepository();
             this.orderItemOrderRepository = RepositoryFactory.CreateOrderItemOrderRepository();
 
             this.orderCustomerService = new OrderCustomerService();
