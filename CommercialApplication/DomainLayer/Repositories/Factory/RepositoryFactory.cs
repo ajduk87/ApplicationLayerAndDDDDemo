@@ -54,6 +54,26 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.Factory
             return new OrderItemSelectRepository();
         }
 
+        public static OrderItemInsertRepository CreateOrderItemInsertRepository()
+        {
+            return new OrderItemInsertRepository();
+        }
+
+        public static OrderItemUpdateRepository CreateOrderItemUpdateRepository()
+        {
+            return new OrderItemUpdateRepository();
+        }
+
+        public static OrderItemDeleteRepository CreateOrderItemDeleteRepository()
+        {
+            return new OrderItemDeleteRepository();
+        }
+
+        public static OrderItemExistsRepository CreateOrderItemExistsRepository()
+        {
+            return new OrderItemExistsRepository();
+        }
+
         public static OrderRepository CreateOrderRepository()
         {
             return new OrderRepository();

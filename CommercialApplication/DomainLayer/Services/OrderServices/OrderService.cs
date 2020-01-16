@@ -1,4 +1,5 @@
 ﻿using CommercialApplication.DomainLayer.Entities.OrderEntities;
+using CommercialApplication.DomainLayer.Repositories.OrderRepositories.OrderItemRepositories;
 using CommercialApplicationCommand.DomainLayer.Entities.CustomerEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
 using CommercialApplicationCommand.DomainLayer.Repositories.Factory;
@@ -13,6 +14,14 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
     {
         private readonly IOrderRepository orderRepository;
         //private readonly IOrderItemRepository orderItemRepository;
+        private readonly IOrderItemSelectRepository orderItemSelectRepository;
+        private readonly IOrderItemInsertRepository orderItemInsertRepository;
+        private readonly IOrderItemUpdateRepository orderItemUpdateRepository;
+        private readonly IOrderItemDeleteRepository orderItemDeleteRepository;
+        private readonly IOrderItemExistsRepository orderItemExistsRepository;
+
+
+
         private readonly IOrderItemOrderRepository orderItemOrderRepository;
 
         private readonly IOrderCustomerService orderCustomerService;
@@ -22,7 +31,13 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
         public OrderService()
         {
             this.orderRepository = RepositoryFactory.CreateOrderRepository();
-            //this.orderItemRepository = RepositoryFactory.CreateOrderItemRepository();
+            this.orderItemSelectRepository = RepositoryFactory.CreateOrderItemSelectRepository();
+            this.orderItemInsertRepository = RepositoryFactory.CreateOrderItemInsertRepository();
+            this.orderItemUpdateRepository = RepositoryFactory.CreateOrderItemUpdateRepository();
+            this.orderItemDeleteRepository = RepositoryFactory.CreateOrderItemDeleteRepository();
+            this.orderItemExistsRepository = RepositoryFactory.CreateOrderItemExistsRepository();
+
+
             this.orderItemOrderRepository = RepositoryFactory.CreateOrderItemOrderRepository();
 
             this.orderCustomerService = new OrderCustomerService();
@@ -76,7 +91,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             List<OrderItem> orderItems = new List<OrderItem>();
             foreach (long id in orderItemsIds)
             {
-                OrderItem orderItem = this.orderItemRepository.SelectById(connection, id);
+                OrderItem orderItem = this.orderItemSelectRepository.SelectByIdWay1(connection, id);
                 orderItems.Add(orderItem);
             }
             double firstOrderSumValue = this.SumValue(connection, orderItems);
@@ -93,7 +108,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
                 List<OrderItem> orderItemsForCurrentOrder = new List<OrderItem>();
                 foreach (long id in orderItemsIds)
                 {
-                    OrderItem orderItem = this.orderItemRepository.SelectById(connection, id);
+                    OrderItem orderItem = this.orderItemSelectRepository.SelectByIdWay1(connection, id);
                     orderItemsForCurrentOrder.Add(orderItem);
                 }
                 currentOrderSumValue = this.SumValue(connection, orderItemsForCurrentOrder);
@@ -113,7 +128,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             List<OrderItem> orderItems = new List<OrderItem>();
             foreach (long id in orderItemsIds)
             {
-                OrderItem orderItem = this.orderItemRepository.SelectById(connection, id);
+                OrderItem orderItem = this.orderItemSelectRepository.SelectByIdWay1(connection, id);
                 orderItems.Add(orderItem);
             }
             double firstOrderSumValue = this.SumValue(connection, orderItems);
@@ -130,7 +145,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
                 List<OrderItem> orderItemsForCurrentOrder = new List<OrderItem>();
                 foreach (long id in orderItemsIds)
                 {
-                    OrderItem orderItem = this.orderItemRepository.SelectById(connection, id);
+                    OrderItem orderItem = this.orderItemSelectRepository.SelectByIdWay1(connection, id);
                     orderItemsForCurrentOrder.Add(orderItem);
                 }
                 currentOrderSumValue = this.SumValue(connection, orderItemsForCurrentOrder);

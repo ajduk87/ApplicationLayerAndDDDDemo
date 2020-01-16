@@ -16,13 +16,26 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 {
     public class OrderItemService : IOrderItemService
     {
+        //private readonly IOrderItemRepository orderItemRepository;
+        private readonly IOrderItemSelectRepository orderItemSelectRepository;
+        private readonly IOrderItemInsertRepository orderItemInsertRepository;
+        private readonly IOrderItemUpdateRepository orderItemUpdateRepository;
+        private readonly IOrderItemDeleteRepository orderItemDeleteRepository;
+        private readonly IOrderItemExistsRepository orderItemExistsRepository;
+
         private readonly IOrderItemSelectRepository orderItemRepository;
         private readonly IActionRepository actionRepository;
         private readonly IProductRepository productRepository;
 
         public OrderItemService()
         {
-            this.orderItemRepository = RepositoryFactory.CreateOrderItemSelectRepository();
+            //this.orderItemRepository = RepositoryFactory.CreateOrderItemRepository();
+            this.orderItemSelectRepository = RepositoryFactory.CreateOrderItemSelectRepository();
+            this.orderItemInsertRepository = RepositoryFactory.CreateOrderItemInsertRepository();
+            this.orderItemUpdateRepository = RepositoryFactory.CreateOrderItemUpdateRepository();
+            this.orderItemDeleteRepository = RepositoryFactory.CreateOrderItemDeleteRepository();
+            this.orderItemExistsRepository = RepositoryFactory.CreateOrderItemExistsRepository();
+
             this.actionRepository = RepositoryFactory.CreateActionRepository();
             this.productRepository = RepositoryFactory.CreateProductRepository();
         }
@@ -45,7 +58,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 
         public OrderItem SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
-            return this.orderItemRepository.SelectById(connection, id);
+            return this.orderItemSelectRepository.SelectByIdWay1(connection, id);
         }
 
         public IEnumerable<OrderItem> SelectByIds(IDbConnection connection, IEnumerable<long> ids, IDbTransaction transaction = null)
@@ -53,7 +66,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             List<OrderItem> orderItems = new List<OrderItem>();
             foreach (long id in ids)
             {
-                OrderItem orderItem = this.orderItemRepository.SelectById(connection, id);
+                OrderItem orderItem = this.orderItemSelectRepository.SelectByIdWay1(connection, id);
                 orderItems.Add(orderItem);
             }
             return orderItems;
@@ -61,40 +74,40 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 
         public long Insert(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
         {
-            return this.orderItemRepository.Insert(connection, orderItem);
+            return this.orderItemInsertRepository.InsertWay1(connection, orderItem);
         }
 
         public void InsertList(IDbConnection connection, IEnumerable<OrderItem> orderItems, IDbTransaction transaction = null)
         {
             foreach (OrderItem orderItem in orderItems)
             {
-                this.orderItemRepository.Insert(connection, orderItem);
+                this.orderItemInsertRepository.InsertWay1(connection, orderItem);
             }
         }
 
         public void Update(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
         {
-            this.orderItemRepository.Update(connection, orderItem);
+            this.orderItemUpdateRepository.UpdateWay1(connection, orderItem);
         }
 
         public void UpdateList(IDbConnection connection, IEnumerable<OrderItem> orderItems, IDbTransaction transaction = null)
         {
             foreach (OrderItem orderItem in orderItems)
             {
-                this.orderItemRepository.Update(connection, orderItem);
+                this.orderItemUpdateRepository.UpdateWay1(connection, orderItem);
             }
         }
 
         public void Delete(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
-            this.orderItemRepository.Delete(connection, id);
+            this.orderItemDeleteRepository.DeleteWay1(connection, id);
         }
 
         public void DeleteByIds(IDbConnection connection, IEnumerable<long> ids, IDbTransaction transaction = null)
         {
             foreach (long id in ids)
             {
-                this.orderItemRepository.Delete(connection, id);
+                this.orderItemDeleteRepository.DeleteWay1(connection, id);
             }
         }
 

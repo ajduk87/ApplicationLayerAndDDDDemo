@@ -11,14 +11,14 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.OderItem
 {
     internal class OrderItemUpdateValidator : AbstractValidator<OrderItemUpdateModel>
     {
-        private readonly IOrderItemSelectRepository orderItemRepository;
+        private readonly IOrderItemExistsRepository orderItemExistsRepository;
         private readonly IProductRepository productRepository;
         private readonly IActionRepository actionRepository;
         private readonly IDatabaseConnectionFactory databaseConnectionFactory;
 
         public OrderItemUpdateValidator(IDatabaseConnectionFactory databaseConnectionFactory)
         {
-            this.orderItemRepository = RepositoryFactory.CreateOrderItemSelectRepository();
+            this.orderItemExistsRepository = RepositoryFactory.CreateOrderItemExistsRepository();
             this.productRepository = RepositoryFactory.CreateProductRepository();
             this.actionRepository = RepositoryFactory.CreateActionRepository();
             this.databaseConnectionFactory = databaseConnectionFactory;
@@ -58,7 +58,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.OderItem
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
-                return this.orderItemRepository.Exists(connection, id);
+                return this.orderItemExistsRepository.ExistsWay1(connection, id);
             }
         }
 
