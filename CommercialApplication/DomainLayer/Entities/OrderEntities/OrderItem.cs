@@ -2,6 +2,7 @@
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.InvoiceItem;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
+using System.Collections.Generic;
 
 namespace CommercialApplicationCommand.DomainLayer.Entities.OrderEntities
 {
@@ -9,7 +10,7 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.OrderEntities
     {
         public ProductId ProductId { get; set; }
         public Amount Amount { get; set; }
-        public Money Value { get; set; }
+        public IEnumerable<Money> Value { get; set; }
         public Discount DiscountBasic { get; set; }
         public ActionId ActionId { get; set; }
     }
