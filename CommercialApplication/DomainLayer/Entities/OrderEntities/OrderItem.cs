@@ -10,7 +10,7 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.OrderEntities
     {
         public ProductId ProductId { get; set; }
         public Amount Amount { get; set; }
-        public IEnumerable<Money> Value { get; set; }
+        public Moneys Value { get; set; }
         public Discount DiscountBasic { get; set; }
         public ActionId ActionId { get; set; }
     }

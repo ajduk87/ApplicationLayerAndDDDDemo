@@ -249,6 +249,7 @@
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\Id.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\DateTimeValueObject.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\Money.cs" />
+    <Compile Include="DomainLayer\Entities\ValueObjects\Common\Moneys.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\Percent.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Common\State.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\InvoiceItemInvoice\InvoiceId.cs" />
