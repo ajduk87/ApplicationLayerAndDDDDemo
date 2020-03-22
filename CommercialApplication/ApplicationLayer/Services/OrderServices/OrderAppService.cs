@@ -205,11 +205,34 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
                             CustomerId = orderDto.CustomerId
                         };
                         OrderCustomer orderCustomer = this.dtoToEntityMapper.Map<OrderCustomerDto, OrderCustomer>(orderCustomerDto);
-                        this.orderCustomerService.Update(connection, orderCustomer);
+                        //this.orderCustomerService.Update(connection, orderCustomer);
+                        this.orderCustomerRepository.Update(connection, orderCustomer);
                         IEnumerable<OrderItem> orderItems = this.dtoToEntityMapper.MapList<IEnumerable<OrderItemDto>, IEnumerable<OrderItem>>(orderDto.OrderItems);
-                        IEnumerable<OrderItem> calculatedOrderItemsWithBasicDiscount = this.orderItemService.IncludeBasicDiscountForPaying(connection, orderItems);
-                        IEnumerable<OrderItem> calculatedOrderItemsWithBasicAndActionDiscount = this.orderItemService.IncludeActionDiscountForPaying(connection, calculatedOrderItemsWithBasicDiscount);
-                        this.orderItemService.UpdateList(connection, calculatedOrderItemsWithBasicAndActionDiscount, transaction);
+                        //IEnumerable<OrderItem> calculatedOrderItemsWithBasicDiscount = this.orderItemService.IncludeBasicDiscountForPaying(connection, orderItems);
+                        IEnumerable<OrderItem> calculatedOrderItemsWithBasicDiscount;
+                        List<OrderItem> calculatedOrderItems = new List<OrderItem>();
+                        foreach (OrderItem orderItem in orderItems)
+                        {
+                            OrderItem calculatedOrderItem = orderItem;
+                            calculatedOrderItem.Value = this.IncludeBasicDiscountForPayingOneItem(connection, orderItem);
+                            calculatedOrderItems.Add(calculatedOrderItem);
+                        }
+                        calculatedOrderItemsWithBasicDiscount = calculatedOrderItems;
+                        //IEnumerable<OrderItem> calculatedOrderItemsWithBasicAndActionDiscount = this.orderItemService.IncludeActionDiscountForPaying(connection, calculatedOrderItemsWithBasicDiscount);
+                        IEnumerable<OrderItem> calculatedOrderItemsWithBasicAndActionDiscount;
+                        List <OrderItem> calculatedOrderItems2 = new List<OrderItem>();
+                        foreach (OrderItem orderItem in orderItems)
+                        {
+                            OrderItem calculatedOrderItem = orderItem;
+                            calculatedOrderItem.Value = this.IncludeActionDiscountForPayingOneItem(connection, orderItem);
+                            calculatedOrderItems2.Add(calculatedOrderItem);
+                        }
+                        calculatedOrderItemsWithBasicAndActionDiscount = calculatedOrderItems2;
+                        //this.orderItemService.UpdateList(connection, calculatedOrderItemsWithBasicAndActionDiscount, transaction);
+                        foreach (OrderItem orderItem in orderItems)
+                        {
+                            this.orderItemRepository.Update(connection, orderItem);
+                        }
                         transaction.Commit();
                     }
                     catch (Exception ex)
