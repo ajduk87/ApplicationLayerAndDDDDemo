@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CommercialApplicationCommand.DomainLayer.Entities.CommonEntities
 {
-    public class Money : ValueObject
+    public class Money : Entity
     {
         public double Value { get; set; }
         public Currency Currency { get; set; }
@@ -17,11 +17,6 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.CommonEntities
         {
             this.Value = Value;
             this.Currency = Currency;
-        }
-
-        public Money Add(Money money)
-        {
-            return new Money(this.Value + money.Value, new Currency("dinara"));
         }
     }
 }

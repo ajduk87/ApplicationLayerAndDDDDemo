@@ -17,9 +17,11 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.OrderEntities
 
         public Money MyValue(Money money, Money money2, Money money3, Money money4)
         {
-            return money.Add(money2)
-                        .Add(money3)
-                        .Add(money4);
+            Money money12 = new Money(money.Value + money2.Value, new Currency("dinara"));
+            Money money123 = new Money(money12.Value + money3.Value, new Currency("dinara"));
+            Money money1234 = new Money(money123.Value + money4.Value, new Currency("dinara"));
+
+            return money1234;
         }
     }
 }

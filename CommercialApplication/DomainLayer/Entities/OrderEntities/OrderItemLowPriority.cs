@@ -21,7 +21,7 @@ namespace CommercialApplication.DomainLayer.Entities.OrderEntities
 
         public Money MyValue(Money money, Money money2)
         {
-            return money.Add(money2);
+            return new Money(money.Value + money2.Value, new Currency("dinara"));
         }
     }
 }
