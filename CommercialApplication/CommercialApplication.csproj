@@ -229,7 +229,10 @@
     <Compile Include="ApplicationLayer\Validation\Storage\StorageDeleteValidator.cs" />
     <Compile Include="ApplicationLayer\Validation\Storage\StorageUpdateValidator.cs" />
     <Compile Include="DomainLayer\Entities\ActionEntities\Action.cs" />
-    <Compile Include="DomainLayer\Entities\CommonEntities\Money.cs" />
+    <Compile Include="DomainLayer\Entities\OrderEntities\OrderItemHighPriority.cs" />
+    <Compile Include="DomainLayer\Entities\OrderEntities\OrderItemLowPriority.cs" />
+    <Compile Include="DomainLayer\Entities\OrderEntities\OrderItemNormalPriority.cs" />
+    <Compile Include="DomainLayer\Entities\ValueObjects\Common\Money.cs" />
     <Compile Include="DomainLayer\Entities\CustomerEntities\OrderCustomer.cs" />
     <Compile Include="DomainLayer\Entities\Extensions\OrderItemExtensions.cs" />
     <Compile Include="DomainLayer\Entities\Extensions\ProductExtensions.cs" />
@@ -440,7 +443,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DomainLayer\Entities\CommonEntities\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DomainLayer\Repositories\Sql\ActionQueries.resx">
       <Generator>ResXFileCodeGenerator</Generator>
