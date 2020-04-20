@@ -123,5 +123,25 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             return calculatedOrderItems;
         }
 
+        public Money CalculateValue(Money money, Money money2, Money money3, Money money4)
+        {
+            Money money12 = new Money(money.Value + money2.Value, new Currency("dinara"));
+            Money money123 = new Money(money12.Value + money3.Value, new Currency("dinara"));
+            Money money1234 = new Money(money123.Value + money4.Value, new Currency("dinara"));
+
+            return money1234;
+        }
+        public Money CalculateValue(Money money, Money money2, Money money3)
+        {
+            Money money12 = new Money(money.Value + money2.Value, new Currency("dinara"));
+            Money money123 = new Money(money12.Value + money3.Value, new Currency("dinara"));
+
+            return money123;
+        }
+        public Money CalculateValue(Money money, Money money2)
+        {
+            return new Money(money.Value + money2.Value, new Currency("dinara"));
+        }
+
     }
 }

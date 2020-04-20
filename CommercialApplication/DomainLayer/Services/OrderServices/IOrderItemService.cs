@@ -20,5 +20,9 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 
         IEnumerable<OrderItemHighPriority> IncludeBasicDiscountForPaying(IDbConnection connection, IEnumerable<OrderItemHighPriority> orderItems, IDbTransaction transaction = null);
         IEnumerable<OrderItemHighPriority> IncludeActionDiscountForPaying(IDbConnection connection, IEnumerable<OrderItemHighPriority> orderItems, IDbTransaction transaction = null);
+
+        Money CalculateValue (Money money, Money money2, Money money3, Money money4);
+        Money CalculateValue(Money money, Money money2, Money money3);
+        Money CalculateValue(Money money, Money money2);
     }
 }

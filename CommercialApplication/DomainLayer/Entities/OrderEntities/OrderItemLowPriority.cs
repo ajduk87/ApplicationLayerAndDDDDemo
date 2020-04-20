@@ -19,9 +19,5 @@ namespace CommercialApplication.DomainLayer.Entities.OrderEntities
         public Discount DiscountBasic { get; set; }
         public ActionId ActionId { get; set; }
 
-        public Money MyValue(Money money, Money money2)
-        {
-            return new Money(money.Value + money2.Value, new Currency("dinara"));
-        }
     }
 }
