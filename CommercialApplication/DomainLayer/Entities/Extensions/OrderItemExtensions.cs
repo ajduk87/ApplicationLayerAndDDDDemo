@@ -19,12 +19,12 @@ namespace CommercialApplication.DomainLayer.Entities.Extensions
 
         public static Money ValueWithDiscountBasic(this OrderItemHighPriority orderItem, UnitCost unitCost)
         {
-            return new Money(orderItem.Amount.Content * unitCost.Value * orderItem.DiscountBasic.Content, new Currency("dinara"));
+            return new Money(orderItem.Amount.Content * unitCost.Value * (1 - orderItem.DiscountBasic.Content), new Currency("dinara"));
         }
 
         public static Money ValueWithDiscountAction(this OrderItemHighPriority orderItem, UnitCost unitCost, Action action)
         {
-            return new Money(orderItem.Amount * unitCost.Value * action.Discount, new Currency("dinara"));
+            return new Money(orderItem.Amount * unitCost.Value * (1 - action.Discount), new Currency("dinara"));
         }
     }
 }
