@@ -43,11 +43,11 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
                 {
                     CustomerId = orderCustomer.CustomerId,
                     OrderItems = orderItemDtoes
-                };                
+                };
             }
 
 
-        }    
+        }
 
         public OrderDto GetOrder(long id)
         {
@@ -112,7 +112,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
             }
         }
 
-        public void UpdateExistingOrder(OrderDto orderDto)
+        public void ModifyExistingOrder(OrderDto orderDto)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
@@ -143,7 +143,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
             }
         }
 
-        public void DeleteExistingOrder(long id)
+        public void RemoveExistingOrder(long id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {

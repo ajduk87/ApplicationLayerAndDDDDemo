@@ -30,7 +30,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
         private Money IncludeBasicDiscountForPayingOneItem(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
         {
             double unitCost = this.productRepository.SelectById(connection, orderItem.ProductId).UnitCost.Value;
-            return new Money { Value = orderItem.Amount * unitCost * orderItem.DiscountBasic };
+            return new Money { Value = orderItem.Amount * unitCost * (1 - orderItem.DiscountBasic) };
         }
 
         private Money IncludeActionDiscountForPayingOneItem(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
@@ -38,7 +38,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             Action action = this.actionRepository.SelectByProductId(connection, orderItem.ProductId.Content);
             ProductId id = new ProductId(orderItem.ProductId);
             double unitCost = this.productRepository.SelectById(connection, id).UnitCost.Value;
-            return orderItem.Amount.Content > action.ThresholdAmount ? new Money { Value = orderItem.Amount * unitCost * action.Discount } : new Money { Value = orderItem.Amount * unitCost };
+            return orderItem.Amount.Content > action.ThresholdAmount ? new Money { Value = orderItem.Amount * unitCost * (1 - action.Discount) } : new Money { Value = orderItem.Amount * unitCost };
         }
 
         public OrderItem SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
