@@ -11,9 +11,9 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
         OrderDto GetMinSumValueOrderForDay(DateTime day);
         void CreateNewOrder(OrderDto orderDto);
 
-        void UpdateExistingOrder(OrderDto orderDto);
+        void ModifyExistingOrder(OrderDto orderDto);
 
-        void DeleteExistingOrder(long id);
+        void RemoveExistingOrder(long id);
         void SetState(OrderStateDto orderStateDto);
     }
 }
