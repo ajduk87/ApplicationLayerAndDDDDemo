@@ -27,12 +27,12 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
 
         public Action SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
-            return connection.QueryFirst<Action>(ActionQueries.SelectById, new { id });
+            return connection.Query<Action>(ActionQueries.SelectById, new { id }).SingleOrDefault();
         }
 
         public Action SelectByProductId(IDbConnection connection, long productid, IDbTransaction transaction = null)
         {
-            return connection.QueryFirst<Action>(ActionQueries.SelectByProductId, new { productid });
+            return connection.Query<Action>(ActionQueries.SelectByProductId, new { productid }).SingleOrDefault();
         }
 
         public Action SelectByProductAndCustomerId(IDbConnection connection, int productid, int customerid, IDbTransaction transaction = null)

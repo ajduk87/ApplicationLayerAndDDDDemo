@@ -93,7 +93,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         public HttpResponseMessage Update(OrderUpdateModel orderUpdateModel)
         {
             OrderDto orderDto = this.mapper.Map<OrderDto>(orderUpdateModel);
-            this.orderAppService.UpdateExistingOrder(orderDto);
+            this.orderAppService.ModifyExistingOrder(orderDto);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
@@ -114,7 +114,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         [ValidateModelStateFilter]
         public HttpResponseMessage Delete(OrderDeleteModel orderDeleteModel)
         {
-            this.orderAppService.DeleteExistingOrder(orderDeleteModel.Id);
+            this.orderAppService.RemoveExistingOrder(orderDeleteModel.Id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

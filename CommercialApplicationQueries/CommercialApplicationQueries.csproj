@@ -147,6 +147,7 @@
     <Compile Include="Dtoes\Dto.cs" />
     <Compile Include="Dtoes\OrderDto.cs" />
     <Compile Include="Dtoes\OrderItemDto.cs" />
+    <Compile Include="Extensions\OrderDtoExtensionMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IOrderDtoRepository.cs" />
