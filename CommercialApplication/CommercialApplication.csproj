@@ -271,6 +271,7 @@
     <Compile Include="DomainLayer\Entities\ValueObjects\OrderItemOrder\OrderId.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\OrderItemOrder\OrderItemId.cs" />
     <Compile Include="DomainLayer\Entities\ValueObjects\Product\KindOfProduct.cs" />
+    <Compile Include="DomainLayer\Extensions\ActionExtensionMethod.cs" />
     <Compile Include="DomainLayer\Mappings\DtoToEntityMapper.cs" />
     <Compile Include="ApplicationLayer\Validation\ValidateModelStateFilter.cs" />
     <Compile Include="ApplicationLayer\Validation\ValidatorFactory.cs" />

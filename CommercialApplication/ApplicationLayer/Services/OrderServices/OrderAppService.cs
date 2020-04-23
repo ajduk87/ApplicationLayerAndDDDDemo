@@ -108,7 +108,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
             }
         }
 
-        public void UpdateExistingOrder(OrderDto orderDto)
+        public void ModiifyExistingOrder(OrderDto orderDto)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
@@ -139,7 +139,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
             }
         }
 
-        public void DeleteExistingOrder(long id)
+        public void RemoveExistingOrder(long id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
