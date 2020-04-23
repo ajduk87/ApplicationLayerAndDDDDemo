@@ -60,7 +60,7 @@ namespace CommercialClientApplication
                 dgCurrentOrder.ItemsSource = cvOrderItems;
             }
 
-          
+
         }
 
         private void BtnFinishOrder_Click(object sender, RoutedEventArgs e)
@@ -111,7 +111,7 @@ namespace CommercialClientApplication
             {
                 ProductName = tfenterproductname.Text,
                 Amount = Convert.ToInt32(tfenteramount.Text),
-                Value = $"{ Convert.ToDouble(tfenterbasicdiscount.Text) * 100 * productDto.UnitCost.Value } {productDto.UnitCost.Currency}"
+                Value = $"{ (1 - Convert.ToDouble(tfenterbasicdiscount.Text)) * Convert.ToInt32(tfenteramount.Text) * productDto.UnitCost.Value } {productDto.UnitCost.Currency}"
             };
 
             this.OrderItems.Add(orderItem);

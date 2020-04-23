@@ -5,6 +5,7 @@ using Dapper;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using CommercialApplication.DomainLayer.Extensions;
 
 namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories
 {
@@ -32,7 +33,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
 
         public Action SelectByProductId(IDbConnection connection, long productid, IDbTransaction transaction = null)
         {
-            return connection.QueryFirst<Action>(ActionQueries.SelectByProductId, new { productid });
+            return connection.Query<Action>(ActionQueries.SelectByProductId, new { productid }).SingleOrDefault();
         }
 
         public Action SelectByProductAndCustomerId(IDbConnection connection, int productid, int customerid, IDbTransaction transaction = null)
