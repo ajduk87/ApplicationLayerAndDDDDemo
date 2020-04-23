@@ -230,6 +230,7 @@
     <Compile Include="ApplicationLayer\Validation\Storage\StorageUpdateValidator.cs" />
     <Compile Include="DomainLayer\Entities\ActionEntities\Action.cs" />
     <Compile Include="DomainLayer\Entities\CommonEntities\Money.cs" />
+    <Compile Include="DomainLayer\Entities\Extensions\ActionExtensionMethod.cs" />
     <Compile Include="DomainLayer\Entities\OrderEntities\OrderItemHighPriority.cs" />
     <Compile Include="DomainLayer\Entities\OrderEntities\OrderItemLowPriority.cs" />
     <Compile Include="DomainLayer\Entities\OrderEntities\OrderItemNormalPriority.cs" />
