@@ -5,6 +5,7 @@ using Dapper;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using CommercialApplication.DomainLayer.Extensions;
 
 namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories
 {
@@ -27,7 +28,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
 
         public Action SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
-            return connection.QueryFirst<Action>(ActionQueries.SelectById, new { id });
+            return connection.Query<Action>(ActionQueries.SelectById, new { id }).SingleOrDefault();
         }
 
         public void Insert(IDbConnection connection, Action actionEntity, IDbTransaction transaction = null)
