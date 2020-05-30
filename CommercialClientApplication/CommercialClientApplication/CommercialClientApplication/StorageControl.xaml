@@ -31,50 +31,48 @@
 
         <Label  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Enter new storage" FontSize="20"/>
 
-        <Label  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="name : "/>
+        <Label  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="name : "/>
         <TextBox Grid.Column="1" Name="tfentername" Grid.Row="1" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
 
-        <Label  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="location : "/>
+        <Label  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="location : "/>
         <TextBox Grid.Column="1" Name="tfenterlocation" Grid.Row="2" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
 
         <Button Name = "btnEnterStorage" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Height="25" Content="enter new storage" Click="BtnEnterStorage_Click"/>
 
         <Label  Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Update existing storage" FontSize="20"/>
 
-        <Label  Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="name : "/>
+        <Label  Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="name : "/>
         <TextBox Grid.Column="4" Name="tfupdatename" Grid.Row="1" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
 
-        <Label  Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="location : "/>
+        <Label  Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="location : "/>
         <TextBox Grid.Column="4" Name="tfupdatelocation" Grid.Row="2" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
 
         <Button Name = "btnUpdateStorage" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Width="200" Height="25" Content="update storage" Click="BtnUpdateStorage_Click"/>
 
-        <Label  Grid.Column="6" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="name : "/>
-        <TextBox Grid.Column="7" Name="tfgetname" Grid.Row="1" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        <Label  Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Select storage name :  : "/>
 
-        <Button Name = "btnGetStorageLocation" Grid.Column="6" Grid.Row="2" Grid.ColumnSpan="2" Width="200" Height="25" Content="get storage location" Click="BtnGetStorageLocation_Click"/>
+        <ComboBox Name="cmbStorageName" Grid.Column="6" Grid.Row="2" Grid.ColumnSpan="2" Width="130" Height="25" SelectionChanged="CmbStorageName_SelectionChanged"></ComboBox>
 
         <Label  Grid.Column="6" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="location : "/>
         <TextBox Grid.Column="7" Name="tfgetlocation" IsReadOnly="true" Grid.Row="3" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
 
         <Label  Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Storage state" FontSize="20"/>
 
-        <Label  Grid.Column="3" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="name : "/>
-        <TextBox Grid.Column="4" Name="tfstatename" Grid.Row="6" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+        <Label  Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Select storage name : "/>
 
-        <Button Name = "btnGetStorageState" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Width="200" Height="25" Content="get storage state" Click="BtnGetStorageState_Click"/>
+        <ComboBox Name="cmbStorageStateName" SelectionChanged="CmbStorageState_SelectionChanged" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Height="25" Width="130px"></ComboBox>
 
-        <DataGrid Grid.Column="1"                   
+        <DataGrid Grid.Column="1"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding StorehouseItems}"
                   CanUserAddRows="False"
                   SelectionMode="Single"
-                  Name="dgStorageState" 
-                  Grid.ColumnSpan="6" 
-                  Grid.Row="8" 
+                  Name="dgStorageState"
+                  Grid.ColumnSpan="6"
+                  Grid.Row="8"
                   Width="Auto"
-                  Height="Auto" 
-                  VerticalAlignment="Top" 
+                  Height="Auto"
+                  VerticalAlignment="Top"
                   Margin="0,0,0,-47">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -92,7 +90,6 @@
             </DataGrid.ColumnHeaderStyle>
 
             <DataGrid.Columns>
-                <DataGridTextColumn   Header="Storage name" Width="*" FontSize="12" IsReadOnly="True" Binding="{Binding Path=StorageName}"/>
                 <DataGridTextColumn   Header="Product name" Width="*" FontSize="12" IsReadOnly="True" Binding="{Binding Path=ProductName}"/>
                 <DataGridTextColumn   Header="Amount" Width="*" FontSize="12" IsReadOnly="True" Binding="{Binding Path=Amount}"/>
             </DataGrid.Columns>

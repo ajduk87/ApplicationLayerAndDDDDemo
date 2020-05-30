@@ -48,22 +48,6 @@ namespace CommercialClientApplication
 
             this.storageService = registrationServices.Container.Resolve<IStorageService>();
 
-            //StorehouseItem StorehouseItem = new StorehouseItem
-            //{
-            //    ProductName = "kafa",
-            //    StorageName = "Doncafe Beograd",
-            //    Amount = 15
-            //};
-            //StorehouseItem StorehouseItem2 = new StorehouseItem
-            //{
-            //    ProductName = "sok od jabuke",
-            //    StorageName = "Nectar Beograd",
-            //    Amount = 15
-            //};
-
-            //StorehouseItems.Add(StorehouseItem);
-            //StorehouseItems.Add(StorehouseItem2);
-
             this.urls = new StorageUrls();
 
             this.apiCaller = registrationServices.Container.Resolve<IApiCaller>();
@@ -73,6 +57,18 @@ namespace CommercialClientApplication
             {
                 dgStorageState.ItemsSource = cvStorehouseItems;
             }
+
+            string responseMessage = this.apiCaller.Get(this.urls.Storage);
+            string response = Regex.Unescape(responseMessage).Trim('"');
+            List<StorageDto> storageDtoes = JsonConvert.DeserializeObject<List<StorageDto>>(response);
+            List<string> storageNames = new List<string>();
+            storageDtoes.ForEach(storageDto => storageNames.Add(storageDto.Name));
+
+            this.cmbStorageName.ItemsSource = storageNames;
+            this.cmbStorageName.SelectedIndex = 0;
+
+            this.cmbStorageStateName.ItemsSource = storageNames;
+            this.cmbStorageStateName.SelectedIndex = 0;
         }
 
         private void BtnEnterStorage_Click(object sender, RoutedEventArgs e)
@@ -102,9 +98,9 @@ namespace CommercialClientApplication
             this.apiCaller.Put(this.urls.Storage, storageDto);
         }
 
-        private void BtnGetStorageLocation_Click(object sender, RoutedEventArgs e)
+        private void CmbStorageName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string name = tfgetname.Text;
+            string name = this.cmbStorageName.SelectedValue.ToString();
 
             string responseMessage = this.apiCaller.Get(this.urls.Storage, new object[] { name });
             string response = Regex.Unescape(responseMessage).Trim('"');
@@ -113,9 +109,9 @@ namespace CommercialClientApplication
             tfgetlocation.Text = storageDto.Location;
         }
 
-        private void BtnGetStorageState_Click(object sender, RoutedEventArgs e)
+        private void CmbStorageState_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string name = tfstatename.Text;
+            string name = this.cmbStorageStateName.SelectedValue.ToString();
 
             string responseMessage = this.apiCaller.Get(this.urls.StorageContent, new object[] { name });
             string response = Regex.Unescape(responseMessage).Trim('"');
