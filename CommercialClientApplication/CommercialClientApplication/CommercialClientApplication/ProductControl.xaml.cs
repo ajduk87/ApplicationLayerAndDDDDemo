@@ -46,6 +46,15 @@ namespace CommercialClientApplication
             this.urls = new ProductUrls();
 
             this.apiCaller = registrationServices.Container.Resolve<IApiCaller>();
+
+            string responseMessage = this.apiCaller.Get(this.urls.Product);
+            string response = Regex.Unescape(responseMessage).Trim('"');
+            List<ProductDto> productDtoes = JsonConvert.DeserializeObject<List<ProductDto>>(response);
+            List<string> productNames = new List<string>();
+            productDtoes.ForEach(productDto => productNames.Add(productDto.Name));
+
+            this.cmbProductName.ItemsSource = productNames;
+            this.cmbProductName.SelectedIndex = 0;
         }
 
         private void BtnEnterProduct_Click(object sender, RoutedEventArgs e)
@@ -92,25 +101,9 @@ namespace CommercialClientApplication
             this.apiCaller.Put(this.urls.Product, productDto);
         }
 
-        private void BtnGetProductInfo_Click(object sender, RoutedEventArgs e)
-        {
-            string name = tfgetname.Text;
-
-            string responseMessage = this.apiCaller.Get(this.urls.Product, new object[] { name });
-            string response = Regex.Unescape(responseMessage).Trim('"');
-            ProductDto productDto = JsonConvert.DeserializeObject<ProductDto>(response);
-
-            tfgetunitcost.Text = productDto.UnitCost.ToString();
-            tfgetdescription.Text = productDto.Description;
-            tfgetimageurl.Text = productDto.ImageUrl;
-            tfgetvideolink.Text = productDto.VideoLink;
-            tfgetserialnumber.Text = productDto.SerialNumber;
-            tfgetkindofproduct.Text = productDto.KindOfProduct;
-        }
-
         private void BtnEnterProductInStorage_Click(object sender, RoutedEventArgs e)
         {
-            string name = tfgetname.Text;
+            string name = this.cmbProductName.SelectedValue.ToString();
             string responseMessage = this.apiCaller.Get(this.urls.Product, new object[] { name });
             string response = Regex.Unescape(responseMessage).Trim('"');
             ProductDto productDto = JsonConvert.DeserializeObject<ProductDto>(response);
@@ -130,6 +123,22 @@ namespace CommercialClientApplication
             };
 
             this.apiCaller.Post(this.urls.ProductInStorage, productStorageDto);
+        }
+
+        private void CmbProductName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string name = this.cmbProductName.SelectedValue.ToString();
+
+            string responseMessage = this.apiCaller.Get(this.urls.Product, new object[] { name });
+            string response = Regex.Unescape(responseMessage).Trim('"');
+            ProductDto productDto = JsonConvert.DeserializeObject<ProductDto>(response);
+
+            tfgetunitcost.Text = productDto.UnitCost.ToString();
+            tfgetdescription.Text = productDto.Description;
+            tfgetimageurl.Text = productDto.ImageUrl;
+            tfgetvideolink.Text = productDto.VideoLink;
+            tfgetserialnumber.Text = productDto.SerialNumber;
+            tfgetkindofproduct.Text = productDto.KindOfProduct;
         }
     }
 }
