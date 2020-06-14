@@ -20,13 +20,22 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.InvoicesService
         private readonly IInvoiceService invoicesService;
         private readonly IOrderService orderService;
 
-        public InvoicesAppService()
+        public InvoicesAppService(IInvoiceCustomerService invoiceCustomerService,
+                                  IInvoiceItemInvoiceService invoiceItemInvoicesService,
+                                  IInvoiceItemService invoiceItemService,
+                                  IInvoiceService invoicesService,
+                                  IOrderService orderService)
         {
-            this.invoicesService = this.registrationServices.Instance.Container.Resolve<IInvoiceService>();
-            this.invoiceItemService = this.registrationServices.Instance.Container.Resolve<IInvoiceItemService>();
-            this.invoiceItemInvoicesService = this.registrationServices.Instance.Container.Resolve<IInvoiceItemInvoiceService>();
-            this.invoiceCustomerService = this.registrationServices.Instance.Container.Resolve<IInvoiceCustomerService>();
-            this.orderService = this.registrationServices.Instance.Container.Resolve<IOrderService>();
+            this.invoiceCustomerService = invoiceCustomerService;
+            this.invoiceItemInvoicesService = invoiceItemInvoicesService;
+            this.invoiceItemService = invoiceItemService;
+            this.invoicesService = invoicesService;
+            this.orderService = orderService;
+            //this.invoicesService = this.registrationServices.Instance.Container.Resolve<IInvoiceService>();
+            //this.invoiceItemService = this.registrationServices.Instance.Container.Resolve<IInvoiceItemService>();
+            //this.invoiceItemInvoicesService = this.registrationServices.Instance.Container.Resolve<IInvoiceItemInvoiceService>();
+            //this.invoiceCustomerService = this.registrationServices.Instance.Container.Resolve<IInvoiceCustomerService>();
+            //this.orderService = this.registrationServices.Instance.Container.Resolve<IOrderService>();
         }
 
         private InvoiceDto GetLookForInvoice(long id)
@@ -117,7 +126,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.InvoicesService
                         Console.Write(ex.Message);
                     }
                 }
-            }           
+            }
         }
 
         public InvoiceDto GetMaxSumValueInvoiceForDay(DateTime day)

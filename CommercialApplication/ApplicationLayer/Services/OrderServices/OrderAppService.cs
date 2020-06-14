@@ -19,12 +19,19 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
         private readonly IOrderItemService orderItemService;
         private readonly IOrderService orderService;
 
-        public OrderAppService()
+        public OrderAppService(IOrderCustomerService orderCustomerService,
+                               IOrderItemOrderService orderItemOrderService,
+                               IOrderItemService orderItemService,
+                               IOrderService orderService)
         {
-            this.orderService = this.registrationServices.Instance.Container.Resolve<IOrderService>();
-            this.orderItemService = this.registrationServices.Instance.Container.Resolve<IOrderItemService>();
-            this.orderCustomerService = this.registrationServices.Instance.Container.Resolve<IOrderCustomerService>();
-            this.orderItemOrderService = this.registrationServices.Instance.Container.Resolve<IOrderItemOrderService>();
+            this.orderCustomerService = orderCustomerService;
+            this.orderItemOrderService = orderItemOrderService;
+            this.orderItemService = orderItemService;
+            this.orderService = orderService;
+            //this.orderService = this.registrationServices.Instance.Container.Resolve<IOrderService>();
+            //this.orderItemService = this.registrationServices.Instance.Container.Resolve<IOrderItemService>();
+            //this.orderCustomerService = this.registrationServices.Instance.Container.Resolve<IOrderCustomerService>();
+            //this.orderItemOrderService = this.registrationServices.Instance.Container.Resolve<IOrderItemOrderService>();
         }
 
         private OrderDto GetLookForOrder(long id)

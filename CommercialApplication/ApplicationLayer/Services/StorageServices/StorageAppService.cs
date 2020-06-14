@@ -17,10 +17,12 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.StorageServices
         private readonly IProductStorageService productStorageService;
         private readonly IStorageService storageService;
 
-        public StorageAppService()
+        public StorageAppService(IProductStorageService productStorageService, IStorageService storageService)
         {
-            this.storageService = this.registrationServices.Instance.Container.Resolve<IStorageService>();
-            this.productStorageService = this.registrationServices.Instance.Container.Resolve<IProductStorageService>();
+            this.storageService = storageService;
+            this.productStorageService = productStorageService;
+            //this.storageService = this.registrationServices.Instance.Container.Resolve<IStorageService>();
+            //this.productStorageService = this.registrationServices.Instance.Container.Resolve<IProductStorageService>();
         }
 
         public IEnumerable<StorageDto> GetAll()

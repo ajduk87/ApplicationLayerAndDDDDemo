@@ -14,9 +14,10 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
     {
         private readonly IInvoicesAppService invoicesAppService;
 
-        public InvoicesController()
+        public InvoicesController(IInvoicesAppService invoicesAppService)
         {
-            this.invoicesAppService = this.registrationAppServices.Instance.Container.Resolve<IInvoicesAppService>();
+            this.invoicesAppService = invoicesAppService;
+            //this.invoicesAppService = this.registrationAppServices.Instance.Container.Resolve<IInvoicesAppService>();
         }
 
         [HttpGet]

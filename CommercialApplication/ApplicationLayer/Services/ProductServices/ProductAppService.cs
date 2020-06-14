@@ -16,9 +16,10 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.ProductServices
     {
         private readonly IProductService productService;
 
-        public ProductAppService()
+        public ProductAppService(IProductService productService)
         {
-            this.productService = this.registrationServices.Instance.Container.Resolve<IProductService>();
+            this.productService = productService;
+            //this.productService = this.registrationServices.Instance.Container.Resolve<IProductService>();
         }
 
         public IEnumerable<ProductDto> GetAll()

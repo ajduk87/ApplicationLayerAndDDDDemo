@@ -7,7 +7,7 @@ using System.Data;
 
 namespace CommercialApplicationCommand.DomainLayer.Services.StorageServices
 {
-    internal interface IStorageService
+    public interface IStorageService
     {
         IEnumerable<Storage> Select(IDbConnection connection, IDbTransaction transaction = null);
         Storage SelectById(IDbConnection connection, StorageId id, IDbTransaction transaction = null);

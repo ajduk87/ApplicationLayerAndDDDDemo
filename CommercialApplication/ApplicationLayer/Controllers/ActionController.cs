@@ -14,9 +14,9 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
     {
         private readonly IActionAppService actionAppService;
 
-        public ActionController(IActionAppService actionAppSer)
+        public ActionController(IActionAppService actionAppService)
         {
-            this.actionAppService = actionAppSer;
+            this.actionAppService = actionAppService;
             //this.actionAppService = this.registrationAppServices.Instance.Container.Resolve<IActionAppService>();
         }
 

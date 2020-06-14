@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CommercialApplicationCommand.ApplicationLayer.Services.StorageServices
 {
-    internal interface IStorageAppService
+    public interface IStorageAppService
     {
         IEnumerable<StorageDto> GetAll();
         StorageDto GetById(int id);

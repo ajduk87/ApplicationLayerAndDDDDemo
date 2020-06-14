@@ -15,8 +15,9 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
     {
         private readonly IOrderAppService orderAppService;
 
-        public OrderController()
+        public OrderController(IOrderAppService orderAppService)
         {
+            this.orderAppService = orderAppService;
             this.orderAppService = this.registrationAppServices.Container.Resolve<IOrderAppService>();
         }
 

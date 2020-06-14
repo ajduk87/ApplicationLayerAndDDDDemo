@@ -19,9 +19,10 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
     {
         private readonly IStorageAppService storageAppService;
 
-        public StorageController()
+        public StorageController(IStorageAppService storageAppService)
         {
-            this.storageAppService = this.registrationAppServices.Instance.Container.Resolve<IStorageAppService>();
+            this.storageAppService = storageAppService;
+            //this.storageAppService = this.registrationAppServices.Instance.Container.Resolve<IStorageAppService>();
         }
 
         [HttpGet]
