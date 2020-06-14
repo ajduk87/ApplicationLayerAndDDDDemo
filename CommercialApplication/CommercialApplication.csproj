@@ -40,6 +40,9 @@
     <Reference Include="Autofac, Version=5.1.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.5.1.2\lib\net461\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=5.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.5.0.0\lib\net461\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
@@ -302,6 +305,7 @@
     <Compile Include="ApplicationLayer\Validation\Storage\StorageCreateValidator.cs" />
     <Compile Include="ApplicationLayer\Validation\Storage\StorageDeleteValidator.cs" />
     <Compile Include="ApplicationLayer\Validation\Storage\StorageUpdateValidator.cs" />
+    <Compile Include="ContainerInitializer.cs" />
     <Compile Include="DomainLayer\Entities\ActionEntities\Action.cs" />
     <Compile Include="DomainLayer\Entities\CommonEntities\Money.cs" />
     <Compile Include="DomainLayer\Entities\CustomerEntities\OrderCustomer.cs" />

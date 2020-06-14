@@ -14,9 +14,10 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.ActionServices
     {
         private readonly IActionService actionService;
 
-        public ActionAppService()
+        public ActionAppService(IActionService actionService)
         {
-            this.actionService = this.registrationServices.Instance.Container.Resolve<IActionService>();
+            this.actionService = actionService;
+            //this.actionService = this.registrationServices.Instance.Container.Resolve<IActionService>();
         }
 
         public IEnumerable<ActionDto> GetAll()

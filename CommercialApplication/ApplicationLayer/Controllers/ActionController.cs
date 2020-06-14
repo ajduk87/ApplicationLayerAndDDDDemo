@@ -14,9 +14,10 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
     {
         private readonly IActionAppService actionAppService;
 
-        public ActionController()
+        public ActionController(IActionAppService actionAppSer)
         {
-            this.actionAppService = this.registrationAppServices.Instance.Container.Resolve<IActionAppService>();
+            this.actionAppService = actionAppSer;
+            //this.actionAppService = this.registrationAppServices.Instance.Container.Resolve<IActionAppService>();
         }
 
         [HttpGet]
