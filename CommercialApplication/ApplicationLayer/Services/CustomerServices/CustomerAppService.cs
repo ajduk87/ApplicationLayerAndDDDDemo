@@ -11,6 +11,11 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.CustomerService
     {
         private readonly ICustomerService customerService;
 
+        public CustomerAppService()
+        {
+            this.customerService = this.registrationServices.Instance.Container.Resolve<ICustomerService>();
+        }
+
         public CustomerAppService(ICustomerService customerService)
         {
             this.customerService = customerService;

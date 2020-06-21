@@ -12,6 +12,7 @@ namespace CommercialClientApplication.Urls
         public string Product { get; set; }
         public string CustomerByName { get; set; }
         public string Customer { get; set; }
+        public string ActionByProductId { get; set; }
 
         public OrderUrls()
         {
@@ -19,6 +20,7 @@ namespace CommercialClientApplication.Urls
             this.Product = $"{ServerIpAddress}/api/product";
             this.CustomerByName = $"{ServerIpAddress}/api/customerbyname";
             this.Customer = $"{ServerIpAddress}/api/customer";
+            this.ActionByProductId = $"{ServerIpAddress}/api/actionbyproductid";
         }
     }
 }

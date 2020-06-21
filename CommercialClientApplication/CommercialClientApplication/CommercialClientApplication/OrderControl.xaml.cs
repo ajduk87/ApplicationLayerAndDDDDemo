@@ -98,11 +98,16 @@ namespace CommercialClientApplication
             string response = Regex.Unescape(responseMessage).Trim('"');
             ProductDto productDto = JsonConvert.DeserializeObject<ProductDto>(response);
 
+            responseMessage = this.apiCaller.Get(this.urls.ActionByProductId, new object[] { productDto.Id });
+            response = Regex.Unescape(responseMessage).Trim('"');
+            ActionDto actionDto = JsonConvert.DeserializeObject<ActionDto>(response);
+
             OrderItemDto orderItemDto = new OrderItemDto
             {
                 ProductId = productDto.Id,
                 Amount = Convert.ToInt32(tfenteramount.Text),
-                DiscountBasic = Convert.ToDouble(tfenterbasicdiscount.Text)
+                DiscountBasic = Convert.ToDouble(tfenterbasicdiscount.Text),
+                ActionId = actionDto.Id
             };
 
             this.OrderItemDtoes.Add(orderItemDto);

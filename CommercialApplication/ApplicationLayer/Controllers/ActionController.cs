@@ -30,7 +30,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/action/{id}")]
+        [Route("api/actionbyid/{id}")]
         public ActionViewModel Get(long id)
         {
             ActionDto actionDto = actionAppService.Get(id);

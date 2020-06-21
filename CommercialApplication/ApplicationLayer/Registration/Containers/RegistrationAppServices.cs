@@ -23,6 +23,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Registration.Containers
         private void Register()
         {
             objContainer = new ContainerBuilder();
+            objContainer.RegisterModule<CommercialApplicationCommand.DomainLayer.Registration.Services.RegistrationModule>();
             objContainer.RegisterModule<RegistrationModule>();
             objContainer.RegisterModule<RegistrationValidatorsModule>();
             Container = objContainer.Build();

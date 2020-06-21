@@ -2,6 +2,7 @@
 using Autofac.Integration.WebApi;
 using CommercialApplicationCommand.ApplicationLayer.Controllers;
 using CommercialApplicationCommand.ApplicationLayer.Registration;
+using CommercialApplicationCommand.ApplicationLayer.Services.CustomerServices;
 using CommercialApplicationCommand.DomainLayer.Registration.Mappers;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,19 @@ namespace CommercialApplication
         public static ILifetimeScope GetContainer()
         {
             objContainer = new ContainerBuilder();
-            objContainer.RegisterModule<CommercialApplicationCommand.ApplicationLayer.Registration.RegistrationModule>();
-            objContainer.RegisterModule<RegistrationValidatorsModule>();
+
+            objContainer.RegisterApiControllers(Assembly.GetExecutingAssembly())/*.PropertiesAutowired()*/;
+            objContainer.Register<CustomerController>(c => new CustomerController(new CustomerAppService()));
 
             objContainer.RegisterModule<CommercialApplicationCommand.DomainLayer.Registration.Mappers.RegistrationModule>();
             objContainer.RegisterModule<CommercialApplicationCommand.DomainLayer.Registration.Services.RegistrationModule>();
 
-            objContainer.RegisterApiControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
+            objContainer.RegisterModule<CommercialApplicationCommand.ApplicationLayer.Registration.RegistrationModule>();
+            objContainer.RegisterModule<RegistrationValidatorsModule>();
+
+
+
+
 
             Container = objContainer.Build();
 

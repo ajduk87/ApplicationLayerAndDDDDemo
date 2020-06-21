@@ -23,7 +23,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
 
         public IEnumerable<Action> Select(IDbConnection connection, IDbTransaction transaction = null)
         {
-            return connection.QueryFirst<IEnumerable<Action>>(ActionQueries.Select);
+            return connection.Query<Action>(ActionQueries.Select);
         }
 
         public Action SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)

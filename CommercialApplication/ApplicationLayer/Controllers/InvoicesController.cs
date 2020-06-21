@@ -52,7 +52,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/maxsumvalueorder")]
+        [Route("api/maxsumvalueinvoice")]
         public InvoiceViewModel GetMaxSumValueInvoice(DateTime day)
         {
             InvoiceDto invoiceDto = this.invoicesAppService.GetMaxSumValueInvoiceForDay(day);
@@ -62,7 +62,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/minsumvalueorder")]
+        [Route("api/minsumvalueinvoice")]
         public InvoiceViewModel GetMinSumValueInvoice(DateTime day)
         {
             InvoiceDto invoiceDto = this.invoicesAppService.GetMinSumValueInvoiceForDay(day);

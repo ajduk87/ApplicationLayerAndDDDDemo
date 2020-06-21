@@ -24,7 +24,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.Order
                 .Must(ValidateCustomerId)
                 .WithMessage("The customer specified doesn't exist in the database");
 
-            RuleFor(o => o.orderItems)
+            RuleFor(o => o.OrderItems)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
                 .Must(ValidateOrderItems)

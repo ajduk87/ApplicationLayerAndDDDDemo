@@ -13,12 +13,18 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
 {
     public class CustomerController : BaseController
     {
-        private readonly ICustomerAppService customerAppService;
+        private ICustomerAppService customerAppService;
+
 
         private CustomerController(ICustomerAppService customerAppService)
         {
             this.customerAppService = customerAppService;
             //this.customerAppService = this.registrationAppServices.Instance.Container.Resolve<ICustomerAppService>();
+        }
+
+        public CustomerController(CustomerAppService customerAppService)
+        {
+            this.customerAppService = customerAppService;
         }
 
         [HttpGet]

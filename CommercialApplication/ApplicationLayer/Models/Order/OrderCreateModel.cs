@@ -4,6 +4,6 @@ namespace CommercialApplication.ApplicationLayer.Models.Order
 {
     public class OrderCreateModel : OrderModelBase
     {
-        public IEnumerable<OrderItemCreateModel> orderItems { get; set; }
+        public IEnumerable<OrderItemCreateModel> OrderItems { get; set; }
     }
 }

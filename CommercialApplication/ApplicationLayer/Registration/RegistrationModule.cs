@@ -6,6 +6,7 @@ using CommercialApplicationCommand.ApplicationLayer.Services.InvoicesService;
 using CommercialApplicationCommand.ApplicationLayer.Services.OrderServices;
 using CommercialApplicationCommand.ApplicationLayer.Services.ProductServices;
 using CommercialApplicationCommand.ApplicationLayer.Services.StorageServices;
+using CommercialApplicationCommand.DomainLayer.Services.CustomerServices;
 
 namespace CommercialApplicationCommand.ApplicationLayer.Registration
 {

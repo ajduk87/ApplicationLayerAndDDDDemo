@@ -143,7 +143,7 @@ WHERE customerid = @customerId AND productid = @productid</value>
     <value>SELECT discount, thresholdamount FROM commercialapplication.action WHERE productid = @productid and customerid = @customerid</value>
   </data>
   <data name="SelectByProductId" xml:space="preserve">
-    <value>SELECT discount, thresholdamount FROM commercialapplication.action WHERE productid = @productid</value>
+    <value>SELECT * FROM commercialapplication.action WHERE productid = @productid</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>UPDATE commercialapplication.action
