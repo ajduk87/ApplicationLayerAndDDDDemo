@@ -9,6 +9,7 @@ namespace CommercialApplicationCommand.DomainLayer.Mappings.Entities
         public ProductStorageProfile()
         {
             CreateMap<ProductStorageDto, ProductStorage>();
+            CreateMap<ProductStorage, ProductStorageDto>();
         }
     }
 }

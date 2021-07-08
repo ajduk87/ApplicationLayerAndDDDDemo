@@ -11,12 +11,16 @@ namespace CommercialApplicationCommand.ApplicationLayer.Mappings
     {
         public ProductProfile()
         {
+            CreateMap<UnitCostDto, UnitCostModel>();
             CreateMap<ProductDto, ProductViewModel>();
+                //.ForMember(dest => dest.UnitCost, opt => opt.MapFrom(src => MakeUnitCost(src.UnitCost)));
 
-            CreateMap<ProductCreateModel, ProductDto>()
-                .ForMember(dest => dest.UnitCost, opt => opt.MapFrom(src => MakeUnitCost(src.UnitCost)));
-            CreateMap<ProductUpdateModel, ProductDto>()
-                .ForMember(dest => dest.UnitCost, opt => opt.MapFrom(src => MakeUnitCost(src.UnitCost)));
+            CreateMap<UnitCostModel, UnitCostDto>();
+
+            CreateMap<ProductCreateModel, ProductDto>();
+            //.ForMember(dest => dest.UnitCost, opt => opt.MapFrom(src => MakeUnitCost(src.UnitCost)));
+            CreateMap<ProductUpdateModel, ProductDto>();
+               // .ForMember(dest => dest.UnitCost, opt => opt.MapFrom(src => MakeUnitCost(src.UnitCost)));
             CreateMap<ProductDeleteModel, ProductDto>();
 
             CreateMap<DecreaseFruitsUnitCostModel, DecreaseFruitsUnitCostDto>();
@@ -25,9 +29,9 @@ namespace CommercialApplicationCommand.ApplicationLayer.Mappings
             CreateMap<ProductStateModel, ProductStateDto>();
         }
 
-        private string MakeUnitCost(UnitCostModel unitCostModel)
+        /*private string MakeUnitCost(UnitCostDto unitCostDto)
         {
-            return $"{unitCostModel.Value} {unitCostModel.Currency}";
-        }
+            return $"{unitCostDto.Value} {unitCostDto.Currency}";
+        }*/
     }
 }

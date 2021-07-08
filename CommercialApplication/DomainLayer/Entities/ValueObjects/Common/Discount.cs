@@ -9,6 +9,12 @@
             this.Content = Content;
         }
 
+        public static explicit operator Discount(decimal discount)
+        {
+            double dis = (double)discount;
+            return new Discount(dis);
+        }
+
         public static explicit operator Discount(double discount)
         {
             return new Discount(discount);

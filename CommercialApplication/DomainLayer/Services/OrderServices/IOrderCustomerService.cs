@@ -6,7 +6,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 {
     public interface IOrderCustomerService
     {
-        Customer SelectByOrderId(IDbConnection connection, long id, IDbTransaction transaction = null);
+        OrderCustomer SelectByOrderId(IDbConnection connection, long id, IDbTransaction transaction = null);
         void Insert(IDbConnection connection, OrderCustomer orderCustomer, IDbTransaction transaction = null);
 
         void Delete(IDbConnection connection, long id, IDbTransaction transaction = null);

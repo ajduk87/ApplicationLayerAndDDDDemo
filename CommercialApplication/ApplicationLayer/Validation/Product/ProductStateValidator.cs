@@ -30,17 +30,7 @@ namespace CommercialApplication.ApplicationLayer.Validation.Product
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
                 .Must(ValidateProductName)
-                .WithMessage("The product specified doesn't exist in the database");
-
-            RuleFor(p => p)
-                .Cascade(CascadeMode.StopOnFirstFailure)
-                .NotEmpty()
-                .Must(ValidateNotForSoldState)
-                .WithMessage("The product can't be set to not for sold state because product is unsold state.")
-                .Must(ValidateUnsoldState)
-                .WithMessage("The product can't be set to unsold state because product is not for sold state.")
-                .Must(ValidateForSoldState)
-                .WithMessage("The product can't be set to for sold state because product amount is 0.");
+                .WithMessage("The product specified doesn't exist in the database");          
         }
 
         private bool ValidateProductName(string name)
@@ -49,47 +39,6 @@ namespace CommercialApplication.ApplicationLayer.Validation.Product
             {
                 long id = this.productRepository.SelectByName(connection, new Name(name)).Id;
                 return this.productRepository.Exists(connection, id);
-            }
-        }
-
-        private bool ValidateNotForSoldState(ProductStateModel productStateModel)
-        {
-            if (!productStateModel.State.Equals("notforsold"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                return !this.productRepository.SelectByName(connection, new Name(productStateModel.Name)).State.Content.Equals("unsold");
-            }
-        }
-
-        private bool ValidateUnsoldState(ProductStateModel productStateModel)
-        {
-            if (!productStateModel.State.Equals("unsold"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                return !this.productRepository.SelectByName(connection, new Name(productStateModel.Name)).State.Content.Equals("notforsold");
-            }
-        }
-
-        private bool ValidateForSoldState(ProductStateModel productStateModel)
-        {
-            if (!productStateModel.State.Equals("forsold"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                long id = this.productRepository.SelectByName(connection, new Name(productStateModel.Name)).Id;
-                IEnumerable<ProductStorage> productItems = this.productStorageRepository.SelectProductFromAllStorages(connection, id);
-                return productItems.Select(productItem => productItem.AmountOfProduct.Content).Sum() > 0;
             }
         }
     }

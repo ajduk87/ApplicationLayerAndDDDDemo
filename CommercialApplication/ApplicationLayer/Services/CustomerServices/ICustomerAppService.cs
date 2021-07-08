@@ -7,6 +7,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.CustomerService
     {
         IEnumerable<CustomerDto> GetAll();
         CustomerDto Get(long id);
+        CustomerDto GetByName(string name);
         void CreateNewCustomerInfo(CustomerDto customerDto);
 
         void UpdateExistingCustomerInfo(CustomerDto customerDto);

@@ -3,6 +3,7 @@ using CommercialApplicationCommand.DomainLayer.Entities.ActionEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.CommonEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.InvoicesEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
+using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
 using CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.Factory;
 using CommercialApplicationCommand.DomainLayer.Repositories.InvoicesRepositories;
@@ -29,7 +30,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.InvoicesServices
         private Money IncludeBasicDiscountForPayingOneItem(IDbConnection connection, InvoiceItem invoiceItem, IDbTransaction transaction = null)
         {
             Action action = this.actionRepository.SelectById(connection, invoiceItem.ActionId.Content);
-            Id id = new Id(invoiceItem.ProductId);
+            ProductId id = new ProductId(invoiceItem.ProductId);
             double unitCost = this.productRepository.SelectById(connection, id).UnitCost
                                                                                .Value;
             return invoiceItem.Amount.Content > action.ThresholdAmount ? new Money { Value = invoiceItem.Amount * unitCost * invoiceItem.DiscountBasic } : new Money { Value = invoiceItem.Amount * unitCost };
@@ -39,7 +40,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.InvoicesServices
         {
             Action action = this.actionRepository.SelectById(connection, invoiceItem.ActionId.Content);
             Id id = new Id(invoiceItem.ProductId);
-            double unitCost = this.productRepository.SelectById(connection, id).UnitCost
+            double unitCost = this.productRepository.SelectById(connection, invoiceItem.ProductId).UnitCost
                                                                                .Value;
             return invoiceItem.Amount.Content > action.ThresholdAmount ? new Money { Value = invoiceItem.Amount * unitCost * action.Discount } : new Money { Value = invoiceItem.Amount * unitCost };
         }

@@ -11,5 +11,21 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.CommonEntities
     {
         public double Value { get; set; }
         public Currency Currency { get; set; }
+
+        public Money()
+        {
+
+        }
+
+        public Money(decimal val)
+        {
+            Value = (double)val;
+            Currency = new Currency("din");
+        }
+
+        public static explicit operator Money(decimal val)
+        {
+            return new Money(val);
+        }
     }
 }

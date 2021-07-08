@@ -26,19 +26,7 @@ namespace CommercialApplication.ApplicationLayer.Validation.Order
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
                 .Must(ValidateOrderId)
-                .WithMessage("The order specified doesn't exist in the database");
-
-            RuleFor(p => p)
-                .Cascade(CascadeMode.StopOnFirstFailure)
-                .NotEmpty()
-                .Must(ValidateOpenState)
-                .WithMessage("The order can't be set to open state because product is closed or closedandempty state.")
-                .Must(ValidatePausedState)
-                .WithMessage("The order can't be set to paused state because product is not open state.")
-                .Must(ValidateClosedState)
-                .WithMessage("The order can't be set to closed state because product is in paused state.")
-                .Must(ValidateClosedAndEmptyState)
-                .WithMessage("The order can't be set to closed and empty state because product is in paused state.");
+                .WithMessage("The order specified doesn't exist in the database");          
         }
 
         private bool ValidateOrderId(long orderid)
@@ -47,62 +35,6 @@ namespace CommercialApplication.ApplicationLayer.Validation.Order
             {
                 return this.orderRepository.Exists(connection, orderid);
             }
-        }
-
-        private bool ValidateOpenState(OrderStateModel orderStateModel)
-        {
-            if (!orderStateModel.State.Equals("open"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                string currentState = this.orderRepository.SelectById(connection, orderStateModel.Id).State.Content;
-                return currentState.Equals("paused");
-            }
-        }
-
-        private bool ValidatePausedState(OrderStateModel orderStateModel)
-        {
-            if (!orderStateModel.State.Equals("paused"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                string currentState = this.orderRepository.SelectById(connection, orderStateModel.Id).State.Content;
-                return currentState.Equals("open");
-            }
-        }
-
-        private bool ValidateClosedState(OrderStateModel orderStateModel)
-        {
-            if (!orderStateModel.State.Equals("closed"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                string currentState = this.orderRepository.SelectById(connection, orderStateModel.Id).State.Content;
-                return !currentState.Equals("paused");
-            }
-        }
-
-        private bool ValidateClosedAndEmptyState(OrderStateModel orderStateModel)
-        {
-            if (!orderStateModel.State.Equals("closedandempty"))
-            {
-                return true;
-            }
-
-            using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
-            {
-                string currentState = this.orderRepository.SelectById(connection, orderStateModel.Id).State.Content;
-                return !currentState.Equals("paused");
-            }
-        }
+        }       
     }
 }

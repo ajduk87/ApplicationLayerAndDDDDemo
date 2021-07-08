@@ -81,7 +81,7 @@ namespace CommercialApplication.DomainLayer.Repositories.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT * FROM commercialapplication.orderscustomer WHERE orderId = @orderId;.
+        ///   Looks up a localized string similar to SELECT * FROM commercialapplication.orderscustomer WHERE orderid = @Id;.
         /// </summary>
         internal static string SelectByOrderId {
             get {

@@ -12,8 +12,7 @@ namespace CommercialApplicationCommand
             {
                 Console.WriteLine("Commercial Application Command Server is running.");
 
-                Console.WriteLine("Commercial Application Command Server is running.");
-                Console.WriteLine("Press any key to continue.");
+                Console.WriteLine("Press any key to shutdown the server.");
                 Console.ReadLine();
             }
         }

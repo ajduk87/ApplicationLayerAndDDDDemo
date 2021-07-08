@@ -102,6 +102,17 @@ namespace CommercialApplication.DomainLayer.Repositories.Sql {
         /// <summary>
         ///   Looks up a localized string similar to SELECT id, name, location
         ///FROM commercialapplication.storage
+        ///WHERE id = @id.
+        /// </summary>
+        internal static string SelectById {
+            get {
+                return ResourceManager.GetString("SelectById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT id, name, location
+        ///FROM commercialapplication.storage
         ///WHERE name = @name.
         /// </summary>
         internal static string SelectByName {

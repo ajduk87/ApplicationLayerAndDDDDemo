@@ -1,10 +1,13 @@
 ﻿using Autofac;
 using CommercialApplication.ApplicationLayer.Dtoes.Order;
 using CommercialApplication.ApplicationLayer.Models.Order;
+using CommercialApplication.Queries;
 using CommercialApplicationCommand.ApplicationLayer.Dtoes.Order;
 using CommercialApplicationCommand.ApplicationLayer.Services.OrderServices;
 using CommercialApplicationCommand.ApplicationLayer.Validation;
+using Npgsql;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -14,21 +17,44 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
     public class OrderController : BaseController
     {
         private readonly IOrderAppService orderAppService;
+        //private readonly IOrderDtoRepository orderDtoRepository;
+        //private readonly IDatabaseConnectionFactory databaseConnectionFactory;
 
         public OrderController()
         {
             this.orderAppService = this.registrationAppServices.Container.Resolve<IOrderAppService>();
+            //this.databaseConnectionFactory = this.registrationAppServices.Container.Resolve<IDatabaseConnectionFactory>();
+            //this.orderDtoRepository = new OrderDtoRepository();
         }
 
-        [HttpGet]
-        [Route("api/order")]
-        public OrderViewModel GetOrder(long id)
-        {
-            OrderDto orderDto = this.orderAppService.GetOrder(id);
-            OrderViewModel orderViewModel = this.mapper.Map<OrderViewModel>(orderDto);
+        //[HttpGet]
+        //[Route("api/order/{id}")]
+        //public OrderViewModel GetOrder(long id)
+        //{
+        //    /*OrderDto orderDto = this.orderAppService.GetOrder(id);
+        //    OrderViewModel orderViewModel = this.mapper.Map<OrderViewModel>(orderDto);*/
+        //    using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
+        //    {
+        //        try
+        //        {
+        //            string customerName = this.orderDtoRepository.GetCustomerName(connection, id/*, transaction*/);
+        //            IEnumerable<OrderItemViewModel> orderItems = this.orderDtoRepository.GetOrderItems(connection, id/*, transaction*/);
+        //            OrderViewModel orderViewModel = new OrderViewModel
+        //            {
+        //                CustomerName = customerName,
+        //                OrderItems = orderItems
+        //            };
 
-            return orderViewModel;
-        }
+        //            return orderViewModel;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Console.Write(ex.Message);
+        //            return new OrderViewModel();
+        //        }
+
+        //    }
+        //}
 
         [HttpGet]
         [Route("api/maxsumvalueorder")]
@@ -67,7 +93,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         public HttpResponseMessage Update(OrderUpdateModel orderUpdateModel)
         {
             OrderDto orderDto = this.mapper.Map<OrderDto>(orderUpdateModel);
-            this.orderAppService.UpdateExistingOrder(orderDto);
+            this.orderAppService.ModifyExistingOrder(orderDto);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
@@ -88,7 +114,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         [ValidateModelStateFilter]
         public HttpResponseMessage Delete(OrderDeleteModel orderDeleteModel)
         {
-            this.orderAppService.DeleteExistingOrder(orderDeleteModel.Id);
+            this.orderAppService.RemoveExistingOrder(orderDeleteModel.Id);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

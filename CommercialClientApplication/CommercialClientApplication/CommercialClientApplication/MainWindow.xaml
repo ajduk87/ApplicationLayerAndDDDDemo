@@ -1,0 +1,32 @@
+﻿<Window x:Class="CommercialClientApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CommercialClientApplication"
+        xmlns:uc="clr-namespace:CommercialClientApplication"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Product">
+                <uc:ProductControl/>
+            </TabItem>
+            <TabItem Header="Storage">
+                <uc:StorageControl/>
+            </TabItem>
+            <TabItem Header="Customer">
+                <uc:CustomerControl/>
+            </TabItem>
+            <TabItem Header="Action">
+                <uc:ActionControl/>
+            </TabItem>
+            <TabItem Header="Order">
+                <uc:OrderControl/>
+            </TabItem>
+            <!--<TabItem Header="Invoice">
+                  <uc:InvoiceControl/> 
+            </TabItem>-->
+        </TabControl>
+    </Grid>
+</Window>

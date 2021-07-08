@@ -9,6 +9,9 @@ namespace CommercialApplicationCommand.DomainLayer.Mappings.Entities
         public CustomerProfile()
         {
             CreateMap<CustomerDto, Customer>();
+
+            CreateMap<Customer, CustomerDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Content));
         }
     }
 }

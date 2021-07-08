@@ -1,5 +1,5 @@
-﻿using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
-using CommercialApplicationCommand.DomainLayer.Repositories.Sql;
+﻿using CommercialApplication.DomainLayer.Repositories.Sql;
+using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;

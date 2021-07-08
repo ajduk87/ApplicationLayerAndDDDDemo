@@ -2,6 +2,6 @@
 {
     public class ActionUpdateModel : ActionCreateModel
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
     }
 }

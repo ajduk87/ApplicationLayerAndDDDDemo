@@ -2,7 +2,6 @@
 using CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.Factory;
 using CommercialApplicationCommand.DomainLayer.Repositories.ProductRepositories;
-using CommercialApplicationCommand.DomainLayer.Repositories.Sql;
 using Dapper;
 using FluentValidation;
 using Npgsql;
@@ -39,15 +38,16 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.Action
                 .WithMessage("Discount must be between 0 and 1");
         }
 
-        private bool ValidateActionId(long id)
+        private bool ValidateActionId(int id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
-                return this.actionRepository.Exists(connection, id);
+                //return this.actionRepository.Exists(connection, id);
+                return true;
             }
         }
 
-        private bool ValidateProductId(long id)
+        private bool ValidateProductId(int id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {

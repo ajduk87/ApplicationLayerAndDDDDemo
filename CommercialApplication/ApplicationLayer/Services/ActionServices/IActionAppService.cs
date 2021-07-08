@@ -7,6 +7,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.ActionServices
     {
         IEnumerable<ActionDto> GetAll();
         ActionDto Get(long id);
+        ActionDto GetByProductId(long productid);
         void CreateNewAction(ActionDto actionDto);
         void UpdateExistingAction(ActionDto actionDto);
         void RemoveExistingAction(ActionDto actionDto);

@@ -126,7 +126,7 @@ WHERE orderid = @orderid</value>
 VALUES (@orderid, @customerid)</value>
   </data>
   <data name="SelectByOrderId" xml:space="preserve">
-    <value>SELECT * FROM commercialapplication.orderscustomer WHERE orderId = @orderId;</value>
+    <value>SELECT * FROM commercialapplication.orderscustomer WHERE orderid = @Id;</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>UPDATE commercialapplication.orderscustomer

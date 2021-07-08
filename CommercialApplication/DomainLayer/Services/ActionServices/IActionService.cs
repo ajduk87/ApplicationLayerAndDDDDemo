@@ -9,6 +9,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.ActionServices
     {
         IEnumerable<Action> Select(IDbConnection connection, IDbTransaction transaction = null);
         Action SelectById(IDbConnection connection, long id, IDbTransaction transaction = null);
+        Action SelectByProductId(IDbConnection connection, long productid, IDbTransaction transaction = null);
         void Insert(IDbConnection connection, Action actionEntity, IDbTransaction transaction = null);
 
         void Update(IDbConnection connection, Action actionEntity, IDbTransaction transaction = null);

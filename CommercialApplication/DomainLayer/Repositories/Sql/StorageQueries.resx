@@ -132,6 +132,11 @@ VALUES (@name, @location)</value>
     <value>SELECT id, name, location
 FROM commercialapplication.storage;</value>
   </data>
+  <data name="SelectById" xml:space="preserve">
+    <value>SELECT id, name, location
+FROM commercialapplication.storage
+WHERE id = @id</value>
+  </data>
   <data name="SelectByName" xml:space="preserve">
     <value>SELECT id, name, location
 FROM commercialapplication.storage

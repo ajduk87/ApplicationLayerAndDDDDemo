@@ -2,7 +2,7 @@
 {
     public class OrderCustomerDto : Dto
     {
-        public long CustomerId { get; set; }
-        public long OrderId { get; set; }
+        public int CustomerId { get; set; }
+        public int OrderId { get; set; }
     }
 }

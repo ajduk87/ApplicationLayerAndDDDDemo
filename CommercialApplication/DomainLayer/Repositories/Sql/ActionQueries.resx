@@ -139,6 +139,12 @@ WHERE customerid = @customerId AND productid = @productid</value>
   <data name="SelectById" xml:space="preserve">
     <value>SELECT discount, thresholdamount FROM commercialapplication.action WHERE id = @id</value>
   </data>
+  <data name="SelectByProductAndCustomerId" xml:space="preserve">
+    <value>SELECT discount, thresholdamount FROM commercialapplication.action WHERE productid = @productid and customerid = @customerid</value>
+  </data>
+  <data name="SelectByProductId" xml:space="preserve">
+    <value>SELECT discount, thresholdamount FROM commercialapplication.action WHERE productid = @productid</value>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>UPDATE commercialapplication.action
 SET productid = @productid, discount = @discount

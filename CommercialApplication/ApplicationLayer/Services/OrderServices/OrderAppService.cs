@@ -9,6 +9,7 @@ using System.Linq;
 using System.Collections.Generic;
 using CommercialApplication.ApplicationLayer.Dtoes.Order;
 using CommercialApplication.DomainLayer.Entities.OrderEntities;
+using CommercialApplication.Queries;
 
 namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
 {
@@ -18,6 +19,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
         private readonly IOrderItemOrderService orderItemOrderService;
         private readonly IOrderItemService orderItemService;
         private readonly IOrderService orderService;
+        private readonly IOrderDtoRepository orderDtoRepository;
 
         public OrderAppService()
         {
@@ -34,15 +36,17 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
                 Order order = this.orderService.SelectById(connection, id);
                 IEnumerable<long> orderItemsIds = this.orderItemOrderService.SelectByOrderId(connection, order.Id);
                 List<OrderItem> orderItems = this.orderItemService.SelectByIds(connection, orderItemsIds).ToList();
-                IEnumerable<OrderItemDto> orderItemDtoes = this.dtoToEntityMapper.MapViewList<IEnumerable<OrderItem>, IEnumerable< OrderItemDto>>(orderItems);
-                Customer customer = this.orderCustomerService.SelectByOrderId(connection, order.Id);
+                IEnumerable<OrderItemDto> orderItemDtoes = this.dtoToEntityMapper.MapViewList<IEnumerable<OrderItem>, IEnumerable<OrderItemDto>>(orderItems);
+                OrderCustomer orderCustomer = this.orderCustomerService.SelectByOrderId(connection, order.Id);
 
                 return new OrderDto
                 {
-                    CustomerId = customer.Id,
+                    CustomerId = orderCustomer.CustomerId,
                     OrderItems = orderItemDtoes
                 };
             }
+
+
         }
 
         public OrderDto GetOrder(long id)
@@ -84,7 +88,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
                     try
                     {
                         Order order = this.dtoToEntityMapper.Map<OrderDto, Order>(orderDto);
-                        long orderId = this.orderService.Insert(connection, order);
+                        int orderId = this.orderService.Insert(connection, order);
                         OrderCustomerDto orderCustomerDto = new OrderCustomerDto
                         {
                             CustomerId = orderDto.CustomerId,
@@ -108,7 +112,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
             }
         }
 
-        public void UpdateExistingOrder(OrderDto orderDto)
+        public void ModifyExistingOrder(OrderDto orderDto)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
@@ -139,7 +143,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.OrderServices
             }
         }
 
-        public void DeleteExistingOrder(long id)
+        public void RemoveExistingOrder(long id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {

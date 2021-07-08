@@ -1,4 +1,5 @@
 ﻿using CommercialApplication.DomainLayer.Entities.OrderEntities;
+using CommercialApplication.DomainLayer.Entities.ValueObjects.Common;
 using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
 using CommercialApplicationCommand.DomainLayer.Repositories.Factory;
 using CommercialApplicationCommand.DomainLayer.Repositories.OrderRepositories;
@@ -46,7 +47,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             this.orderRepository.Delete(connection, id);
         }
 
-        public long Insert(IDbConnection connection, Order order, IDbTransaction transaction = null)
+        public int Insert(IDbConnection connection, Order order, IDbTransaction transaction = null)
         {
             return this.orderRepository.Insert(connection, order);
         }
@@ -138,6 +139,99 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
         public void UpdateState(IDbConnection connection, OrderState orderState, IDbTransaction transaction = null)
         {
             Order order = this.orderRepository.SelectById(connection, orderState.Id);
+            if (orderState.Equals("open"))
+            {
+                if (order.State.Equals("closed"))
+                {
+                    //stay in closed state
+                    order.State = new State("closed");
+                }
+                if (order.State.Equals("closedandempty"))
+                {
+                    //stay in closedandempty state
+                    order.State = new State("closedandempty");
+                }
+                if (order.State.Equals("open"))
+                {
+                    //stay in open state
+                    order.State = new State("open");
+                }
+                if (order.State.Equals("paused"))
+                {
+                    //transit to open state
+                    order.State = new State("open");
+                }
+            }
+            else if (orderState.Equals("paused"))
+            {
+                if (order.State.Equals("closed"))
+                {
+                    //stay in closed state
+                    order.State = new State("closed");
+                }
+                if (order.State.Equals("closedandempty"))
+                {
+                    //stay in closedandempty state
+                    order.State = new State("closedandempty");
+                }
+                if (order.State.Equals("open"))
+                {
+                    //transit to paused state
+                    order.State = new State("paused");
+                }
+                if (order.State.Equals("paused"))
+                {
+                    //stay in paused state
+                    order.State = new State("paused");
+                }
+            }
+            else if (orderState.Equals("closed"))
+            {
+                if (order.State.Equals("closed"))
+                {
+                    //stay in closed state
+                    order.State = new State("closed");
+                }
+                if (order.State.Equals("closedandempty"))
+                {
+                    //stay in closedandempty state
+                    order.State = new State("closedandempty");
+                }
+                if (order.State.Equals("open"))
+                {
+                    //transit to closed state
+                    order.State = new State("closed");
+                }
+                if (order.State.Equals("paused"))
+                {
+                    //stay in paused state
+                    order.State = new State("paused");
+                }
+            }
+            else if (orderState.Equals("closedandempty"))
+            {
+                if (order.State.Equals("closed"))
+                {
+                    //stay in closed state
+                    order.State = new State("closed");
+                }
+                if (order.State.Equals("closedandempty"))
+                {
+                    //stay in closedandempty state
+                    order.State = new State("closedandempty");
+                }
+                if (order.State.Equals("open"))
+                {
+                    //transit to closedandempty state
+                    order.State = new State("closedandempty");
+                }
+                if (order.State.Equals("paused"))
+                {
+                    //stay in paused state
+                    order.State = new State("paused");
+                }
+            }
+
             order.State = orderState.State;
             this.orderRepository.Update(connection, order, transaction);
         }

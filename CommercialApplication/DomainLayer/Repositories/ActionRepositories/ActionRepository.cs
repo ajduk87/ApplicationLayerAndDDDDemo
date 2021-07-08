@@ -1,6 +1,6 @@
-﻿using CommercialApplicationCommand.ApplicationLayer.Dtoes.Action;
+﻿using CommercialApplication.DomainLayer.Repositories.Sql;
+using CommercialApplicationCommand.ApplicationLayer.Dtoes.Action;
 using CommercialApplicationCommand.DomainLayer.Entities.ActionEntities;
-using CommercialApplicationCommand.DomainLayer.Repositories.Sql;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
@@ -27,7 +27,17 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
 
         public Action SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
-            return connection.QueryFirst<Action>(ActionQueries.SelectById, new { id });
+            return connection.Query<Action>(ActionQueries.SelectById, new { id }).SingleOrDefault();
+        }
+
+        public Action SelectByProductId(IDbConnection connection, long productid, IDbTransaction transaction = null)
+        {
+            return connection.Query<Action>(ActionQueries.SelectByProductId, new { productid }).SingleOrDefault();
+        }
+
+        public Action SelectByProductAndCustomerId(IDbConnection connection, int productid, int customerid, IDbTransaction transaction = null)
+        {
+            return connection.QueryFirst<Action>(ActionQueries.SelectByProductAndCustomerId, new { productid, customerid });
         }
 
         public void Insert(IDbConnection connection, Action actionEntity, IDbTransaction transaction = null)
@@ -36,7 +46,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
             {
                 productId = actionEntity.ProductId.Content,
                 discount = actionEntity.Discount.Content,
-                customerId = actionEntity.CustomerId.Content,
+                customerId = /*actionEntity.CustomerId.Content*/1,
                 thresholdAmount = actionEntity.ThresholdAmount.Content
             });
         }
@@ -54,7 +64,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositori
         {
             connection.Execute(ActionQueries.Update, new
             {
-                id = actionEntity.Id,
+                id = actionEntity.Id.Content,
                 productId = actionEntity.ProductId.Content,
                 discount = actionEntity.Discount.Content
             });

@@ -8,6 +8,7 @@ using CommercialApplicationCommand.DomainLayer.Services.ProductServices;
 using CommercialApplicationCommand.DomainLayer.Entities.ProductEntities;
 using System.Collections.Generic;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
+using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
 
 namespace CommercialApplicationCommand.ApplicationLayer.Services.StorageServices
 {
@@ -29,6 +30,16 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.StorageServices
                 IEnumerable<Storage> storages = this.storageService.Select(connection);
                 IEnumerable<StorageDto> storageDtoes = this.dtoToEntityMapper.MapViewList<IEnumerable<Storage>, IEnumerable<StorageDto>>(storages);
                 return storageDtoes;
+            }
+        }
+
+        public StorageDto GetById(int id)
+        {
+            using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
+            {
+                Storage storage = this.storageService.SelectById(connection, new StorageId(id));
+                StorageDto storageDto = this.dtoToEntityMapper.MapView<Storage, StorageDto>(storage);
+                return storageDto;
             }
         }
 

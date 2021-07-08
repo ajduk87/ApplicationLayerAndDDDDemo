@@ -1,6 +1,5 @@
 ﻿using CommercialApplication.DomainLayer.Repositories.Sql;
 using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
-using CommercialApplicationCommand.DomainLayer.Repositories.Sql;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
@@ -20,14 +19,14 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.OrderRepositorie
             return connection.ExecuteScalar<bool>(OrderItemQueries.Exists, new { id });
         }
 
-        public OrderItem SelectById(IDbConnection connection, long orderId, IDbTransaction transaction = null)
+        public OrderItem SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
-            return connection.Query<OrderItem>(OrderItemQueries.SelectById, new { orderId }).Single();
+            return connection.Query<OrderItem>(OrderItemQueries.SelectById, new { id }).Single();
         }
 
-        public long Insert(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
+        public int Insert(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
         {
-            return connection.ExecuteScalar<long>(OrderItemQueries.Insert, new
+            return connection.ExecuteScalar<int>(OrderItemQueries.Insert, new
             {
                 productId = orderItem.ProductId.Content,
                 amount = orderItem.Amount.Content,

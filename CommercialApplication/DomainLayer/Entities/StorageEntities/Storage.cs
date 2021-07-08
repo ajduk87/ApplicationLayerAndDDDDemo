@@ -6,6 +6,6 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.StorageEntities
     public class Storage : Entity
     {
         public Name Name { get; set; }
-        public LocationOfStorage LocationOfStorage { get; set; }
+        public LocationOfStorage Location { get; set; }
     }
 }

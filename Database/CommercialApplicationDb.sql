@@ -50,7 +50,7 @@ CREATE TABLE commercialapplication.product
 	ImageUrl varchar(500) NULL,
 	VideoLink varchar(500) NULL,
 	SerialNumber varchar(500) NULL,
-	KindOfProduct varchar(500) NOT NULL,
+	KindOfProduct varchar(500) NOT NULL
 );
 ALTER TABLE commercialapplication.product ADD CONSTRAINT PK_Product
 	PRIMARY KEY (Id);
@@ -128,7 +128,7 @@ CREATE TABLE commercialapplication.action
 (
 	Id integer NOT NULL   DEFAULT NEXTVAL(('commercialapplication."action_id_seq"'::text)::regclass),
 	Productid integer NOT NULL,
-	Discount numeric NOT NULL,
+	Discount  NUMERIC (5, 2) NOT NULL,
 	ThresholdAmount integer NOT NULL,
 	CustomerId integer NOT NULL
 );
@@ -165,7 +165,7 @@ DROP TABLE IF EXISTS commercialapplication.orders CASCADE;
 CREATE TABLE commercialapplication.orders
 (
 	Id integer NOT NULL   DEFAULT NEXTVAL(('commercialapplication."orderitem_id_seq"'::text)::regclass),
-	IsSynchronized boolean NOT NULL,
+	State varchar(500) NOT NULL,
 	CreationDate timestamp without time zone NOT NULL
 );
 ALTER TABLE commercialapplication.orders ADD CONSTRAINT PK_Orders

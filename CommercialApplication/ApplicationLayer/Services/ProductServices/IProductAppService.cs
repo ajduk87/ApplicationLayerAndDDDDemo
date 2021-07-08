@@ -7,6 +7,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.ProductServices
     public interface IProductAppService
     {
         IEnumerable<ProductDto> GetAll();
+        ProductDto GetById(int id);
         ProductDto Get(string name);
         void CreateNewProduct(ProductDto productDto);
         void UpdateExistingProduct(ProductDto productDto);

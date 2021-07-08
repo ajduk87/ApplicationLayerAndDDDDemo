@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CommercialApplication.ApplicationLayer.Models.Order
 {
-    public class OrderViewModel : OrderModelBase
+    public class OrderViewModel
     {
-        public IEnumerable<OrderItemCreateModel> orderItems { get; set; }
+        public string CustomerName { get; set; }
+        public IEnumerable<OrderItemViewModel> OrderItems { get; set; }
     }
 }

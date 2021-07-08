@@ -2,7 +2,7 @@
 using CommercialApplicationCommand.ApplicationLayer.Dtoes.Product;
 using CommercialApplicationCommand.DomainLayer.Entities.ProductEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
-using CommercialApplicationCommand.DomainLayer.Repositories.Sql;
+using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +12,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ProductRepositor
 {
     public class ProductRepository : IProductRepository
     {
-        public Product SelectById(IDbConnection connection, Id id, IDbTransaction transaction = null)
+        public Product SelectById(IDbConnection connection, ProductId id, IDbTransaction transaction = null)
         {
             return connection.Query<Product>(ProductQueries.SelectById, new { id = id.Content }).Single();
         }
@@ -46,7 +46,8 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ProductRepositor
                 Description = product.Description.Content,
                 ImageUrl = product.ImageUrl.Content,
                 VideoLink = product.VideoLink.Content,
-                SerialNumber = product.SerialNumber.Content
+                SerialNumber = product.SerialNumber.Content,
+                KindOfProduct = product.KindOfProduct.Content
             });
         }
 
@@ -59,7 +60,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.ProductRepositor
                 Description = product.Description.Content,
                 ImageUrl = product.ImageUrl.Content,
                 VideoLink = product.VideoLink.Content,
-                id = product.Id
+                id = product.Id.Content
             });
         }
 

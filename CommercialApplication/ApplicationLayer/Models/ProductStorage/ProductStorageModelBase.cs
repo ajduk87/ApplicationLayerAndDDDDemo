@@ -2,8 +2,8 @@
 {
     public abstract class ProductStorageModelBase
     {
-        public long ProductId { get; set; }
-        public long StorageId { get; set; }
+        public int ProductId { get; set; }
+        public int StorageId { get; set; }
         public int AmountOfProduct { get; set; }
     }
 }

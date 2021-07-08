@@ -1,5 +1,5 @@
-﻿using CommercialApplicationCommand.DomainLayer.Entities.InvoicesEntities;
-using CommercialApplicationCommand.DomainLayer.Repositories.Sql;
+﻿using CommercialApplication.DomainLayer.Repositories.Sql;
+using CommercialApplicationCommand.DomainLayer.Entities.InvoicesEntities;
 using Dapper;
 using System.Collections.Generic;
 using System.Data;

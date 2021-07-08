@@ -1,6 +1,7 @@
 ﻿using CommercialApplicationCommand.ApplicationLayer.Dtoes.Storage;
 using CommercialApplicationCommand.DomainLayer.Entities.StorageEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
+using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
 using CommercialApplicationCommand.DomainLayer.Repositories.StorageRepositories;
 using System.Collections.Generic;
 using System.Data;
@@ -20,6 +21,11 @@ namespace CommercialApplicationCommand.DomainLayer.Services.StorageServices
         public IEnumerable<Storage> Select(IDbConnection connection, IDbTransaction transaction = null)
         {
             return this.storageRepository.Select(connection);
+        }
+
+        public Storage SelectById(IDbConnection connection, StorageId id, IDbTransaction transaction = null)
+        {
+            return this.storageRepository.SelectById(connection, id);
         }
 
         public Storage SelectByName(IDbConnection connection, Name name, IDbTransaction transaction = null)

@@ -2,10 +2,10 @@
 {
     public class ActionDto : Dto
     {
-        public long ProductId { get; set; }
+        public int ProductId { get; set; }
         public double Discount { get; set; }
         public int ThresholdAmount { get; set; }
-        public long CustomerId { get; set; }
-        public long SalesChannelId { get; set; }
+        public int CustomerId { get; set; }
+        public int SalesChannelId { get; set; }
     }
 }

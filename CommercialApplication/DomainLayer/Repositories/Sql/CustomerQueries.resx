@@ -137,6 +137,11 @@ FROM commercialapplication.customer;</value>
 FROM commercialapplication.customer
 WHERE id = @id</value>
   </data>
+  <data name="SelectByName" xml:space="preserve">
+    <value>SELECT id, name
+FROM commercialapplication.customer
+WHERE name = @name</value>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>UPDATE commercialapplication.customer
 SET name = @name

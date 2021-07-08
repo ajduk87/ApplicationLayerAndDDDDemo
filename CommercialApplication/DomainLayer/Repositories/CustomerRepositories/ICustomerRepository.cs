@@ -9,7 +9,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.CustomerReposito
     {
         IEnumerable<Customer> Select(IDbConnection connection, IDbTransaction transaction = null);
         Customer SelectById(IDbConnection connection, long id, IDbTransaction transaction = null);
-
+        Customer SelectByName(IDbConnection connection, string name, IDbTransaction transaction = null);
         void Insert(IDbConnection connection, Customer customer, IDbTransaction transaction = null);
 
         void Update(IDbConnection connection, Customer customer, IDbTransaction transaction = null);

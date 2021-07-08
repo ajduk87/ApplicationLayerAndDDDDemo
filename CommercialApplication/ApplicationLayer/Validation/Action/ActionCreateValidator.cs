@@ -31,14 +31,14 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.Action
                 .Must(ValidateDiscount)
                 .WithMessage("Discount must be between 0 and 1");
 
-            RuleFor(a => a.CustomerId)
+            /*RuleFor(a => a.CustomerId)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
                 .Must(ValidateCustomerId)
-                .WithMessage("The customer specified doesn't exist in the database");
+                .WithMessage("The customer specified doesn't exist in the database");*/
         }
 
-        private bool ValidateProductId(long id)
+        private bool ValidateProductId(int id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
@@ -55,7 +55,8 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.Action
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {
-                return this.customerRepository.Exists(connection, id);
+                //return this.customerRepository.Exists(connection, id);
+                return true;
             }
         }
     }

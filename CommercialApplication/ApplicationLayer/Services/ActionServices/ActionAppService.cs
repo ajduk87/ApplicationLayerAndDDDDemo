@@ -39,6 +39,16 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.ActionServices
             }
         }
 
+        public ActionDto GetByProductId(long productid)
+        {
+            using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
+            {
+                DomainLayer.Entities.ActionEntities.Action actionEntity = this.actionService.SelectByProductId(connection, productid);
+                ActionDto actionDto = this.dtoToEntityMapper.MapView<DomainLayer.Entities.ActionEntities.Action, ActionDto>(actionEntity);
+                return actionDto;
+            }
+        }
+
         public void RemoveExistingAction(ActionDto actionDto)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())

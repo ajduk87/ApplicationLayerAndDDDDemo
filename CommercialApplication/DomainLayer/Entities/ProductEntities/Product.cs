@@ -15,7 +15,7 @@ namespace CommercialApplicationCommand.DomainLayer.Entities.ProductEntities
         public VideoLink VideoLink { get; set; }
         public SerialNumber SerialNumber { get; set; }
         public KindOfProduct KindOfProduct { get; set; }
-        public State State { get; set; }
+        //public State State { get; set; }
 
     }
 }

@@ -36,6 +36,16 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.CustomerService
             }
         }
 
+        public CustomerDto GetByName(string name)
+        {
+            using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
+            {
+                Customer customer = this.customerService.SelectByName(connection, name);
+                CustomerDto customerDto = this.dtoToEntityMapper.MapView<Customer, CustomerDto>(customer);
+                return customerDto;
+            }
+        }
+
         public void CreateNewCustomerInfo(CustomerDto customerDto)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())

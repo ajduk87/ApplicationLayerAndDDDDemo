@@ -16,6 +16,11 @@ namespace CommercialApplication.DomainLayer.Entities.ValueObjects.Common
             this.Content = Content;
         }
 
+        public static explicit operator CreationDate(DateTime creationDate)
+        {
+            return new CreationDate(creationDate.ToString("yyyy-MM-dd"));
+        }
+
         public static explicit operator CreationDate(string creationDate)
         {
             return new CreationDate(creationDate);

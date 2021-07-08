@@ -125,8 +125,8 @@ WHERE id = @id</value>
     <value>SELECT EXISTS (SELECT 1 FROM commercialapplication.orders WHERE id = @id)</value>
   </data>
   <data name="Insert" xml:space="preserve">
-    <value>INSERT INTO commercialapplication.orders(state)
-VALUES(@state)
+    <value>INSERT INTO commercialapplication.orders(state, creationdate)
+VALUES(@state, @creationdate)
 RETURNING id</value>
   </data>
   <data name="Select" xml:space="preserve">

@@ -80,8 +80,8 @@ namespace CommercialApplication.DomainLayer.Repositories.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO commercialapplication.product(name, unitcost, description, imageurl, videolink, serialnumber)
-        ///    VALUES (@name, @unitcost, @description, @imageurl, @videolink, @serialnumber).
+        ///   Looks up a localized string similar to INSERT INTO commercialapplication.product(name, unitcost, description, imageurl, videolink, serialnumber, kindofproduct)
+        ///    VALUES (@name, @unitcost, @description, @imageurl, @videolink, @serialnumber, @kindofproduct).
         /// </summary>
         internal static string Insert {
             get {
@@ -133,7 +133,7 @@ namespace CommercialApplication.DomainLayer.Repositories.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT id, name, unitcost, description, imageurl, videolink
+        ///   Looks up a localized string similar to SELECT id, name, unitcost, description, imageurl, videolink, serialnumber, kindofproduct
         ///  FROM commercialapplication.product
         ///WHERE name = @name;.
         /// </summary>

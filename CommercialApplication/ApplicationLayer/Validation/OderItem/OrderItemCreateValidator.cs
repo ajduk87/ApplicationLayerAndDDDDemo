@@ -44,7 +44,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.OderItem
                 .WithMessage("Discount is invalid");
         }
 
-        private bool ValidateProductId(long id)
+        private bool ValidateProductId(int id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {

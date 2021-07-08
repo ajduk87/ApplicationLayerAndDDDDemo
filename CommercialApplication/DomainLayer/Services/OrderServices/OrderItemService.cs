@@ -3,6 +3,7 @@ using CommercialApplicationCommand.DomainLayer.Entities.ActionEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.CommonEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.OrderEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
+using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
 using CommercialApplicationCommand.DomainLayer.Repositories.ActionRepositories;
 using CommercialApplicationCommand.DomainLayer.Repositories.Factory;
 using CommercialApplicationCommand.DomainLayer.Repositories.OrderRepositories;
@@ -28,18 +29,16 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
 
         private Money IncludeBasicDiscountForPayingOneItem(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
         {
-            Action action = this.actionRepository.SelectById(connection, orderItem.ActionId.Content);
-            Id id = new Id(orderItem.ProductId);
-            double unitCost = this.productRepository.SelectById(connection, id).UnitCost.Value;
-            return orderItem.Amount.Content > action.ThresholdAmount ? new Money { Value = orderItem.Amount * unitCost * orderItem.DiscountBasic } : new Money { Value = orderItem.Amount * unitCost };
+            double unitCost = this.productRepository.SelectById(connection, orderItem.ProductId).UnitCost.Value;
+            return new Money { Value = orderItem.Amount * unitCost * (1 - orderItem.DiscountBasic) };
         }
 
         private Money IncludeActionDiscountForPayingOneItem(IDbConnection connection, OrderItem orderItem, IDbTransaction transaction = null)
         {
-            Action action = this.actionRepository.SelectById(connection, orderItem.ActionId.Content);
-            Id id = new Id(orderItem.ProductId);
+            Action action = this.actionRepository.SelectByProductId(connection, orderItem.ProductId.Content);
+            ProductId id = new ProductId(orderItem.ProductId);
             double unitCost = this.productRepository.SelectById(connection, id).UnitCost.Value;
-            return orderItem.Amount.Content > action.ThresholdAmount ? new Money { Value = orderItem.Amount * unitCost * action.Discount } : new Money { Value = orderItem.Amount * unitCost };
+            return orderItem.Amount.Content > action.ThresholdAmount ? new Money { Value = orderItem.Amount * unitCost * (1 - action.Discount) } : new Money { Value = orderItem.Amount * unitCost };
         }
 
         public OrderItem SelectById(IDbConnection connection, long id, IDbTransaction transaction = null)
@@ -67,7 +66,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
         {
             foreach (OrderItem orderItem in orderItems)
             {
-                this.orderItemRepository.Insert(connection, orderItem);
+                orderItem.Id = new Id(this.orderItemRepository.Insert(connection, orderItem));
             }
         }
 
@@ -102,7 +101,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             List<OrderItem> calculatedOrderItems = new List<OrderItem>();
             foreach (OrderItem orderItem in orderItems)
             {
-                OrderItem calculatedOrderItem = new OrderItem();
+                OrderItem calculatedOrderItem = orderItem;
                 calculatedOrderItem.Value = this.IncludeBasicDiscountForPayingOneItem(connection, orderItem);
                 calculatedOrderItems.Add(calculatedOrderItem);
             }
@@ -114,7 +113,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             List<OrderItem> calculatedOrderItems = new List<OrderItem>();
             foreach (OrderItem orderItem in orderItems)
             {
-                OrderItem calculatedOrderItem = new OrderItem();
+                OrderItem calculatedOrderItem = orderItem;
                 calculatedOrderItem.Value = this.IncludeActionDiscountForPayingOneItem(connection, orderItem);
                 calculatedOrderItems.Add(calculatedOrderItem);
             }

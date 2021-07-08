@@ -30,10 +30,19 @@ namespace CommercialApplicationCommand.ApplicationLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/customer")]
+        [Route("api/customer/{id}")]
         public CustomerViewModel Get(long id)
         {
             CustomerDto customerDto = customerAppService.Get(id);
+            CustomerViewModel customerViewModel = this.mapper.Map<CustomerViewModel>(customerDto);
+            return customerViewModel;
+        }
+
+        [HttpGet]
+        [Route("api/customerbyname/{name}")]
+        public CustomerViewModel Get(string name)
+        {
+            CustomerDto customerDto = customerAppService.GetByName(name);
             CustomerViewModel customerViewModel = this.mapper.Map<CustomerViewModel>(customerDto);
             return customerViewModel;
         }

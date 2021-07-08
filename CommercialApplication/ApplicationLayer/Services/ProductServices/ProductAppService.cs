@@ -4,6 +4,7 @@ using CommercialApplication.DomainLayer.Entities.ProductEntities;
 using CommercialApplicationCommand.ApplicationLayer.Dtoes.Product;
 using CommercialApplicationCommand.DomainLayer.Entities.ProductEntities;
 using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.Common;
+using CommercialApplicationCommand.DomainLayer.Entities.ValueObjects.ProductStorage;
 using CommercialApplicationCommand.DomainLayer.Services.ProductServices;
 using Npgsql;
 using System;
@@ -27,6 +28,16 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.ProductServices
                 IEnumerable<Product> products = this.productService.Select(connection);
                 IEnumerable<ProductDto> productDtoes = this.dtoToEntityMapper.MapViewList<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
                 return productDtoes;
+            }
+        }
+
+        public ProductDto GetById(int id)
+        {
+            using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
+            {
+                Product product = this.productService.SelectById(connection, new ProductId(id));
+                ProductDto productDto = this.dtoToEntityMapper.MapView<Product, ProductDto>(product);
+                return productDto;
             }
         }
 

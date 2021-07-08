@@ -15,7 +15,7 @@ namespace CommercialApplicationCommand.DomainLayer.Services.OrderServices
             this.orderCustomerRepository = RepositoryFactory.CreateOrderCustomerRepository();
         }
 
-        public Customer SelectByOrderId(IDbConnection connection, long id, IDbTransaction transaction = null)
+        public OrderCustomer SelectByOrderId(IDbConnection connection, long id, IDbTransaction transaction = null)
         {
             return this.orderCustomerRepository.SelectByOrderId(connection, id);
         }

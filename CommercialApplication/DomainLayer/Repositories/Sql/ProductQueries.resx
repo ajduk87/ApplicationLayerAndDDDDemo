@@ -125,8 +125,8 @@
     <value>SELECT EXISTS(SELECT 1 FROM commercialapplication.product WHERE id = @id)</value>
   </data>
   <data name="Insert" xml:space="preserve">
-    <value>INSERT INTO commercialapplication.product(name, unitcost, description, imageurl, videolink, serialnumber)
-    VALUES (@name, @unitcost, @description, @imageurl, @videolink, @serialnumber)</value>
+    <value>INSERT INTO commercialapplication.product(name, unitcost, description, imageurl, videolink, serialnumber, kindofproduct)
+    VALUES (@name, @unitcost, @description, @imageurl, @videolink, @serialnumber, @kindofproduct)</value>
   </data>
   <data name="Select" xml:space="preserve">
     <value>SELECT id, name, unitcost, description, imageurl, videolink
@@ -148,7 +148,7 @@
 WHERE id = @id;</value>
   </data>
   <data name="SelectByName" xml:space="preserve">
-    <value>SELECT id, name, unitcost, description, imageurl, videolink
+    <value>SELECT id, name, unitcost, description, imageurl, videolink, serialnumber, kindofproduct
   FROM commercialapplication.product
 WHERE name = @name;</value>
   </data>

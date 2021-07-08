@@ -61,7 +61,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.OderItem
             }
         }
 
-        private bool ValidateProductId(long id)
+        private bool ValidateProductId(int id)
         {
             using (NpgsqlConnection connection = this.databaseConnectionFactory.Instance.Create())
             {

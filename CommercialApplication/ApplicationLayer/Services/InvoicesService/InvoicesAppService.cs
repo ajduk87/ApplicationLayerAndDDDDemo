@@ -40,8 +40,6 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.InvoicesService
                 Customer customer = this.invoiceCustomerService.SelectByInvoiceId(connection, invoice.Id);
 
                 Order order = this.orderService.SelectById(connection, invoice.OrderId);
-                order.State = new State("Close");
-                this.orderService.Update(connection, order);
 
                 return new InvoiceDto
                 {
@@ -106,6 +104,11 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.InvoicesService
                         IEnumerable<InvoiceItem> calculatedInvoiceItemsWithBasicAndActionDiscount = this.invoiceItemService.IncludeActionDiscountForPaying(connection, invoiceItems);
                         this.invoiceItemService.InsertList(connection, calculatedInvoiceItemsWithBasicAndActionDiscount, transaction);
                         this.invoiceItemInvoicesService.InsertList(connection, calculatedInvoiceItemsWithBasicDiscount, invoiceId, transaction);
+
+                        Order order = this.orderService.SelectById(connection, invoice.OrderId);
+                        order.State = new State("Close");
+                        this.orderService.Update(connection, order);
+
                         transaction.Commit();
                     }
                     catch (Exception ex)

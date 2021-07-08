@@ -8,7 +8,7 @@ namespace CommercialApplicationCommand.DomainLayer.Repositories.OrderRepositorie
     {
         Order SelectById(IDbConnection connection, long id, IDbTransaction transaction = null);
         IEnumerable<Order> SelectByDay(IDbConnection connection, string day, IDbTransaction transaction = null);
-        long Insert(IDbConnection connection, Order order, IDbTransaction transaction = null);
+        int Insert(IDbConnection connection, Order order, IDbTransaction transaction = null);
 
         void Update(IDbConnection connection, Order order, IDbTransaction transaction = null);
 

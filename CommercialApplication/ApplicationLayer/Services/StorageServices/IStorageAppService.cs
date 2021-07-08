@@ -7,6 +7,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Services.StorageServices
     internal interface IStorageAppService
     {
         IEnumerable<StorageDto> GetAll();
+        StorageDto GetById(int id);
         StorageDto Get(string name);
         void CreateNewStorage(StorageDto storageDto);
 

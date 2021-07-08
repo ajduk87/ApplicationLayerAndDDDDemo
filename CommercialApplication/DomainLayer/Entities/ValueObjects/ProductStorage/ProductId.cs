@@ -2,19 +2,19 @@
 {
     public class ProductId : ValueObject
     {
-        public long Content { get; private set; }
+        public int Content { get; private set; }
 
-        public ProductId(long Content)
+        public ProductId(int Content)
         {
             this.Content = Content;
         }
 
-        public static explicit operator ProductId(long productId)
+        public static explicit operator ProductId(int productId)
         {
             return new ProductId(productId);
         }
 
-        public static implicit operator long(ProductId productId)
+        public static implicit operator int(ProductId productId)
         {
             return productId.Content;
         }

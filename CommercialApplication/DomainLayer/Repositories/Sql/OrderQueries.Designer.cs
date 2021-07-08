@@ -80,8 +80,8 @@ namespace CommercialApplication.DomainLayer.Repositories.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO commercialapplication.orders(state)
-        ///VALUES(@state)
+        ///   Looks up a localized string similar to INSERT INTO commercialapplication.orders(state, creationdate)
+        ///VALUES(@state, @creationdate)
         ///RETURNING id.
         /// </summary>
         internal static string Insert {

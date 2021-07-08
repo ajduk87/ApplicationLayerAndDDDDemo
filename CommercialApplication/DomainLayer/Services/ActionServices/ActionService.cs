@@ -27,7 +27,10 @@ namespace CommercialApplicationCommand.DomainLayer.Services.ActionServices
             return this.actionRepository.SelectById(connection, id);
         }
 
-
+        public Action SelectByProductId(IDbConnection connection, long productid, IDbTransaction transaction = null)
+        {
+            return this.actionRepository.SelectByProductId(connection, productid);
+        }
 
         public void Delete(IDbConnection connection, Action actionEntity, IDbTransaction transaction = null)
         {

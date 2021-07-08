@@ -26,6 +26,11 @@ namespace CommercialApplicationCommand.DomainLayer.Services.CustomerServices
             return customerRepository.SelectById(connection, id);
         }
 
+        public Customer SelectByName(IDbConnection connection, string name, IDbTransaction transaction = null)
+        {
+            return customerRepository.SelectByName(connection, name);
+        }
+
         public void Insert(IDbConnection connection, Customer customer, IDbTransaction transaction = null) =>
             this.customerRepository.Insert(connection, customer);
 

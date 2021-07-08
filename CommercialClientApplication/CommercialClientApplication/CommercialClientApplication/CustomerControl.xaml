@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="CommercialClientApplication.CustomerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CommercialClientApplication"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="{StaticResource Gradient5}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+
+        </Grid.RowDefinitions>
+
+        <Label  Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Enter new customer" FontSize="20"/>
+
+        <Label  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="name : "/>
+        <TextBox Grid.Column="1" Name="tfentername" Grid.Row="1" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+
+        <Label  Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="id : "/>
+        <TextBox Grid.Column="4" Name="tfid" Grid.Row="1" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+
+        <Button Name = "btnEnterCustomer" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Width="200" Height="25" Content="enter new customer" Click="BtnEnterCustomer_Click"/>
+
+        <Label  Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Update existing customer" FontSize="20"/>
+
+        <Label  Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="name : " Margin="50,0,51,5"/>
+        <TextBox Grid.Column="4" Name="tfupdatename" Grid.Row="3" Width="140" Height="20"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,0,11" />
+
+        <Button Name = "btnUpdateCustomer" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Width="200" Height="25" Content="update customer" Click="BtnUpdateCustomer_Click"/>
+
+        <Button Name = "btnGetCustomerList" Grid.Column="6" Grid.Row="2" Grid.ColumnSpan="2" Width="200" Height="25" Content="get customer list" Click="BtnGetCustomerList_Click"/>
+
+        <DataGrid Grid.Column="6" 
+                  Height="Auto" 
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Customers}"
+                  CanUserAddRows="False"
+                  Width="Auto"
+                  Name="dgCustomerList" 
+                  Grid.ColumnSpan="2" 
+                  Grid.Row="3" Margin="0,0,0,-163">
+
+
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="FontSize"
+                                    Value="12" />
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn   Header="Name" Width="*" FontSize="12" IsReadOnly="True" Binding="{Binding Path=Name}"/>
+            </DataGrid.Columns>
+
+
+        </DataGrid>
+
+    </Grid>
+</UserControl>

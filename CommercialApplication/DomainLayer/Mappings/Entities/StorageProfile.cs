@@ -8,8 +8,11 @@ namespace CommercialApplicationCommand.DomainLayer.Mappings.Entities
     {
         public StorageProfile()
         {
-            CreateMap<StorageDto, Storage>()
-                .ForMember(dest => dest.LocationOfStorage, opt => opt.MapFrom(src => src.Location));
+            CreateMap<StorageDto, Storage>();
+
+            CreateMap<Storage, StorageDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.Content))
+                .ForMember(dest => dest.Location, opt => opt.MapFrom(src => src.Location.Content));
         }
     }
 }

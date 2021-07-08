@@ -35,7 +35,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.ProductStorag
             return amountOfProduct > 0;
         }
 
-        private bool ValidateProductId(long id)
+        private bool ValidateProductId(int id)
         {
             using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
             {
@@ -43,7 +43,7 @@ namespace CommercialApplicationCommand.ApplicationLayer.Validation.ProductStorag
             }
         }
 
-        private bool ValidateStorageId(long id)
+        private bool ValidateStorageId(int id)
         {
             using (NpgsqlConnection connection = databaseConnectionFactory.Instance.Create())
             {
